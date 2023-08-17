@@ -1,0 +1,20 @@
+.button {
+    display: inline-block;
+
+    padding: 8px;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    box-shadow:  1px 2px 7px rgba(0, 0, 0, 0.3);
+
+    color: black;
+
+    transition: 0.3s;
+    cursor: pointer;
+
+    &:hover{
+        opacity: 0.9;
+    }
+    &:active{
+        opacity: 0.7;
+    }
+}
