@@ -2,20 +2,22 @@ import { useRef, useState } from 'react';
 import styles from './index.module.scss';
 
 type propsType = {
-    value:string;
-    placeholder:string;
-    charLimit?:number;
-    type?:'text'|'password';
-    name?:string;
-    onChange?:(value:string)=>void;
+    value: string;
+    placeholder: string;
+    charLimit?: number;
+    type?: 'text'|'password';
+    name?: string;
+    onChange?: (value:string) => void;
 }
 
-export function MyInput({type="text", placeholder, charLimit, name, value, onChange}:propsType){
+export function MyInput(props:propsType){
+    let {type="text", placeholder, charLimit, name, value, onChange} = props;
     let placeholderText = useRef<string>(placeholder.length > 13 ? placeholder.slice(0, 13) + ".." : placeholder);
     
-    let [innerValue,setValue] = useState<string>(value);
-    let [isActive,setState] = useState<boolean>(false);
+    let [innerValue, setValue] = useState<string>(value);
+    let [isActive, setState] = useState<boolean>(false);
     let inputElem = useRef<HTMLInputElement>(null);
+
 
     function innerOnChange(event:React.ChangeEvent<HTMLInputElement>){
         let newValue = (charLimit && event.target.value.length > charLimit) ?
@@ -25,6 +27,7 @@ export function MyInput({type="text", placeholder, charLimit, name, value, onCha
         setValue(newValue);
     }
 
+    
    return <div onClick={()=>inputElem.current?.focus()} className={styles.MyInput + " " + ((innerValue.length > 0 || isActive) ? styles.active : "")}>
         {/* placeolder */}
         <div className={styles.inputFon}></div>

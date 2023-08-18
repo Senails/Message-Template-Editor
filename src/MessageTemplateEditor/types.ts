@@ -8,5 +8,5 @@ export type IFblock = {
 export type Ttamplate = {
     First: string;
     IFblocks?: IFblock[];
-    Last?: string;
+    Last?: Ttamplate;
 }

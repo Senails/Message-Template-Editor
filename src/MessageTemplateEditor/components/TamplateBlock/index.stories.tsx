@@ -13,7 +13,7 @@ export const primary: Story = {
     args:{
         tamplate:{
             First:"123456",
-            Last:"7890",
+            Last:{First:"67890"},
             IFblocks:[
                 {
                     ifConditionParam:"isactve",
@@ -21,7 +21,8 @@ export const primary: Story = {
                     Else:{First:"two"},
                 },
             ]
-        }
+        },
+        path:[]
     }
 };
 

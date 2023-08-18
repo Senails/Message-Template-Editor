@@ -16,6 +16,7 @@ export const primary: Story = {
             Then:{First:"one"},
             Else:{First:"two"},
         },
+        path:[]
     }
 };
 

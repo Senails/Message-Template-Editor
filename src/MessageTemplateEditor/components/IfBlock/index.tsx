@@ -6,20 +6,39 @@ import styles from './index.module.scss';
 
 type TProps = {
     ifParams: IFblock;
+    path: string[];
+    ChangeState:(path:string[], newvalue:string)=>void;
+    DeleteIfBlock:(path:string[])=>void;
 }
 
-export function IfBlock({ifParams}:TProps){
+export function IfBlock(props:TProps){
+    let {ifParams, path, ChangeState, DeleteIfBlock} = props;
     const {ifConditionParam, Then, Else} = ifParams;
+    
+    let myPath = [...path, "ifConditionParam"];
+
+
+    function OnChangeInput(newValue: string){
+        ChangeState?.(myPath, newValue);
+    }
+    function DeleteClick(){
+        DeleteIfBlock?.(path);
+    }
+
 
     return <div className={styles.IfBlock}>
         {/* if */}
         <div style={{height:"60px",marginTop:"5px"}}>
             <div style={{paddingTop:"7px"}}>
                 <span>If</span>
-                <Button name={"delete"}/>
+                <Button name={"delete"} onClick={DeleteClick}/>
             </div>
             <div className={styles.TextAreaConteiner}>
-                <MyInput value={ifConditionParam} placeholder={"param name"}/>
+                <MyInput 
+                    value={ifConditionParam} 
+                    placeholder={"param name"} 
+                    onChange={OnChangeInput}
+                />
             </div>
         </div>
 
@@ -29,7 +48,12 @@ export function IfBlock({ifParams}:TProps){
                 <span>Then</span>
             </div>
             <div className={styles.TextAreaConteiner}>
-                <TamplateBlock tamplate={Then}/>
+                <TamplateBlock 
+                    tamplate={Then} 
+                    path={[...path,"Then"]} 
+                    ChangeState={ChangeState}
+                    DeleteIfBlock={DeleteIfBlock}
+                />
             </div>
         </div>
 
@@ -39,7 +63,12 @@ export function IfBlock({ifParams}:TProps){
                 <span>Else</span>
             </div>
             <div className={styles.TextAreaConteiner}>
-                <TamplateBlock tamplate={Else}/>
+                <TamplateBlock 
+                    tamplate={Else} 
+                    path={[...path,"Else"]}
+                    ChangeState={ChangeState}
+                    DeleteIfBlock={DeleteIfBlock}
+                />
             </div>
         </div>
     </div>
