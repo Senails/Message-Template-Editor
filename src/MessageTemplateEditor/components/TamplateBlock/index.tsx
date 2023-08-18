@@ -27,14 +27,12 @@ export function TamplateBlock(props:TProps){
             onChange={OnChangeTextArea}
         />
 
-        {tamplate.IFblocks?.length!>0&&tamplate.IFblocks?.map((elem,i)=>
-        <IfBlock 
-            ifParams={elem} 
-            path={[...path, "IFblocks", i.toString()]}
-            key={i}
+        {tamplate.IFblocks&&<IfBlock 
+            ifParams={tamplate.IFblocks} 
+            path={[...path, "IFblocks"]}
             ChangeState={ChangeState}
             DeleteIfBlock={DeleteIfBlock}
-        />)}
+        />}
         
         {tamplate.Last&&
         <TamplateBlock 

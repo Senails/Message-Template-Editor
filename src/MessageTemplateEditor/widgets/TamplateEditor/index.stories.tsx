@@ -28,14 +28,28 @@ export const Primary: Story = {
         ],
         tamplate:{
             First:"123456",
-            Last:{First:"67890"},
-            IFblocks:[
-                {
+            IFblocks:{
+                ifConditionParam:"isactve",
+                Then:{
+                    First:"one",
+                    Last:{First:"67890"},
+                    IFblocks:{
+                        ifConditionParam:"isactve",
+                        Then:{First:"one"},
+                        Else:{First:"two"},
+                    }
+                },
+                Else:{First:"two"},
+            },
+            Last:{
+                First:"67890",
+                IFblocks:{
                     ifConditionParam:"isactve",
                     Then:{First:"one"},
                     Else:{First:"two"},
                 },
-            ]
+                Last:{First:"two"}
+            },
         }
     }
 };

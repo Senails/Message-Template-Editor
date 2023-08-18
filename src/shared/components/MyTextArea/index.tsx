@@ -9,7 +9,6 @@ type propsType = {
 }
 
 export function MyTextArea({value, placeholder, charsLimit, onChange}:propsType){
-    let [innerValue, setValue] = useState<string>(value);
     let [Height, setHeight] = useState<number|undefined>();
 
     let originElem = useRef<HTMLTextAreaElement>(null);
@@ -21,16 +20,14 @@ export function MyTextArea({value, placeholder, charsLimit, onChange}:propsType)
         if (charsLimit && event.currentTarget.value.length > charsLimit){
             substring = event.currentTarget.value.slice(0, charsLimit);
         }
-        setValue(substring);
         onChange?.(substring);
-        
     }
     function Resize(){
         if (checkElem.current!.scrollHeight + 20 !== originElem.current!.clientHeight){
             setHeight(checkElem.current!.scrollHeight + 20);
         }
     }
-    useEffect(Resize,[innerValue])
+    useEffect(Resize,[value])
 
     
     return <div className={styles.MyTextareaConteiner}>
@@ -38,19 +35,19 @@ export function MyTextArea({value, placeholder, charsLimit, onChange}:propsType)
         <textarea ref={originElem}
         className={styles.MyTextarea} 
         placeholder={placeholder}
-        value={innerValue}
+        value={value}
         onChange={InnerOnChange}
         style={{height:`${Height}px`}}
         ></textarea>
 
         {/* hidden textarea */}
         <div style={{height:"0px",width:"100%",position:"relative",overflow:"hidden"}}>
-            <textarea ref={checkElem} className={styles.textForCheck} value={innerValue} readOnly></textarea>
+            <textarea ref={checkElem} className={styles.textForCheck} value={value} readOnly></textarea>
         </div>
 
         {/* char score */}
         {charsLimit && <div className={styles.charsLimitInfo}>
-            <span>{innerValue.length}/{charsLimit} chars</span>
+            <span>{value.length}/{charsLimit} chars</span>
         </div>}
     </div>
 }

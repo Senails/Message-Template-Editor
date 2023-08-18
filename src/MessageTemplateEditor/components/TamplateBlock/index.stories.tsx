@@ -14,13 +14,11 @@ export const primary: Story = {
         tamplate:{
             First:"123456",
             Last:{First:"67890"},
-            IFblocks:[
-                {
-                    ifConditionParam:"isactve",
-                    Then:{First:"one"},
-                    Else:{First:"two"},
-                },
-            ]
+            IFblocks:{
+                ifConditionParam:"isactve",
+                Then:{First:"one"},
+                Else:{First:"two"},
+            }
         },
         path:[]
     }

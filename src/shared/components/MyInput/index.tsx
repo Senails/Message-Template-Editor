@@ -14,7 +14,6 @@ export function MyInput(props:propsType){
     let {type="text", placeholder, charLimit, name, value, onChange} = props;
     let placeholderText = useRef<string>(placeholder.length > 13 ? placeholder.slice(0, 13) + ".." : placeholder);
     
-    let [innerValue, setValue] = useState<string>(value);
     let [isActive, setState] = useState<boolean>(false);
     let inputElem = useRef<HTMLInputElement>(null);
 
@@ -24,11 +23,10 @@ export function MyInput(props:propsType){
         event.target.value.slice(0,charLimit) : event.target.value;
 
         onChange?.(newValue);
-        setValue(newValue);
     }
 
     
-   return <div onClick={()=>inputElem.current?.focus()} className={styles.MyInput + " " + ((innerValue.length > 0 || isActive) ? styles.active : "")}>
+   return <div onClick={()=>inputElem.current?.focus()} className={styles.MyInput + " " + ((value.length > 0 || isActive) ? styles.active : "")}>
         {/* placeolder */}
         <div className={styles.inputFon}></div>
         <span className={styles.placeholderBlock + " noselect"}>
@@ -44,7 +42,7 @@ export function MyInput(props:propsType){
             onFocus={() => setState(true)} 
             onBlur={() => setState(false)}
             onChange={innerOnChange}
-            value={innerValue} 
+            value={value} 
             className={styles.realInput}
             style={{backgroundColor:"rgba(0, 0, 0, 0) !important"}}
         />
