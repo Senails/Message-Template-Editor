@@ -15,16 +15,14 @@ export function MyTextArea({value, placeholder, charsLimit, onChange}:propsType)
     let originElem = useRef<HTMLTextAreaElement>(null);
     let checkElem = useRef<HTMLTextAreaElement>(null);
 
-
     function InnerOnChange(event: React.ChangeEvent<HTMLTextAreaElement>){
+        let substring = event.currentTarget.value;
         if (charsLimit && event.currentTarget.value.length > charsLimit){
-            let substring = event.currentTarget.value.slice(0, charsLimit);
-            setValue(substring);
-            onChange?.(substring);
-        }else{
-            setValue(event.currentTarget.value);
-            onChange?.(event.currentTarget.value);
+            substring = event.currentTarget.value.slice(0, charsLimit);
         }
+        setValue(substring);
+        onChange?.(substring);
+        
     }
     function Resize(){
         if (checkElem.current!.scrollHeight + 20 !== originElem.current!.clientHeight){

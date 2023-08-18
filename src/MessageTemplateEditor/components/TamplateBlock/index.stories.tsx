@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { TamplateBlock } from "./index";
 
 const meta = {
-    title: 'Tamplate.Editor/TamplateBlock',
+    title: 'Tamplate.Editor/components/TamplateBlock',
     component: TamplateBlock
 } satisfies Meta<typeof TamplateBlock>;
 

@@ -11,29 +11,28 @@ type propsType = {
 }
 
 export function MyInput({type="text", placeholder, charLimit, name, value, onChange}:propsType){
+    let placeholderText = useRef<string>(placeholder.length > 13 ? placeholder.slice(0, 13) + ".." : placeholder);
+    
     let [innerValue,setValue] = useState<string>(value);
     let [isActive,setState] = useState<boolean>(false);
     let inputElem = useRef<HTMLInputElement>(null);
 
-    function OnChange(event:React.ChangeEvent<HTMLInputElement>){
+    function innerOnChange(event:React.ChangeEvent<HTMLInputElement>){
         let newValue = (charLimit && event.target.value.length > charLimit) ?
         event.target.value.slice(0,charLimit) : event.target.value;
 
         onChange?.(newValue);
         setValue(newValue);
     }
-    function Focus(){
-        inputElem.current?.focus();
-    }
 
-   return <div onClick={Focus} className={styles.MyInput + " " + ((innerValue.length > 0 || isActive) ? styles.active : "")}>
+   return <div onClick={()=>inputElem.current?.focus()} className={styles.MyInput + " " + ((innerValue.length > 0 || isActive) ? styles.active : "")}>
         {/* placeolder */}
         <div className={styles.inputFon}></div>
-        <span className={styles.placeholderBlock+" noselect"}>
-            {placeholder.length > 13 ? placeholder.slice(0, 13) + ".." : placeholder}
+        <span className={styles.placeholderBlock + " noselect"}>
+            {placeholderText.current}
         </span>
         <span className={styles.placeholderText + " noselect"}>
-            {placeholder.length > 13 ? placeholder.slice(0, 13) + ".." : placeholder}
+            {placeholderText.current}
         </span>
         
 
@@ -41,7 +40,7 @@ export function MyInput({type="text", placeholder, charLimit, name, value, onCha
         <input ref={inputElem} type={type || "text"} name={name} 
             onFocus={() => setState(true)} 
             onBlur={() => setState(false)}
-            onChange={OnChange}
+            onChange={innerOnChange}
             value={innerValue} 
             className={styles.realInput}
             style={{backgroundColor:"rgba(0, 0, 0, 0) !important"}}

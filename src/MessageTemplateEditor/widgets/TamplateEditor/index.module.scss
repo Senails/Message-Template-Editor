@@ -2,4 +2,10 @@
     // width: 700px;
     min-height: 300px;
     border: 1px solid red;
+
+    h1{
+        text-align: center;
+        color: white;
+        text-shadow: var(--TextShadow);
+    }
 }

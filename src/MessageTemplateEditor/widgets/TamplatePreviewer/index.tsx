@@ -28,19 +28,15 @@ export function TamplatePreviewer({params, tamplate, onCloseClick}:TProps){
     }
 
     return <div className={styles.TamplatePreviewer}>
-        <div style={{height:"20px"}}></div>
-        <h1 style={{textAlign:'center', color:"#ffffff"}}>Message Preview</h1>
-        <div style={{height:"40px"}}></div>
+        <h1 style={{marginTop:"20px"}}>Message Preview</h1>
 
         {/* Message Text */}
-        <p className={styles.resultMessage}>
+        <p className={styles.resultMessage} style={{marginTop:"20px"}}>
             {ComposeMessage()}
         </p>
 
-
         {/* Variables: */}
-        <div style={{height:"40px"}}></div>
-        <div className={styles.variablesConteiner}>
+        <div className={styles.variablesConteiner} style={{marginTop:"20px"}}>
             <p>Variables:</p>
             {paramsState.map((elem, i) => 
             <MyInput value = {elem[1]} placeholder = {elem[0]} key = {i}
@@ -48,10 +44,8 @@ export function TamplatePreviewer({params, tamplate, onCloseClick}:TProps){
         </div>
 
         {/* close button */}
-        <div style={{height:"40px"}}></div>
-        <div style={{display:"flex", justifyContent:"center"}}>
+        <div style={{display:"flex", justifyContent:"center",margin:"40px 0"}}>
             <Button name='Close' onClick={onCloseClick}/>
         </div>
-        <div style={{height:"40px"}}></div>
     </div>
 }

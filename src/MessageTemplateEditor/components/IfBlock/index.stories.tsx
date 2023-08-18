@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { IfBlock } from "./index";
 
 const meta = {
-    title: 'Tamplate.Editor/IfBlock',
+    title: 'Tamplate.Editor/components/IfBlock',
     component: IfBlock
 } satisfies Meta<typeof IfBlock>;
 

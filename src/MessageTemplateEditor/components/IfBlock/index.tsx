@@ -13,8 +13,7 @@ export function IfBlock({ifParams}:TProps){
 
     return <div className={styles.IfBlock}>
         {/* if */}
-        <div style={{height:"5px"}}></div>
-        <div style={{height:"60px"}}>
+        <div style={{height:"60px",marginTop:"5px"}}>
             <div style={{paddingTop:"7px"}}>
                 <span>If</span>
                 <Button name={"delete"}/>
@@ -23,9 +22,9 @@ export function IfBlock({ifParams}:TProps){
                 <MyInput value={ifConditionParam} placeholder={"param name"}/>
             </div>
         </div>
-        <div style={{height:"5px"}}></div>
+
         {/* Then */}
-        <div>
+        <div style={{marginTop:"5px"}}>
             <div>
                 <span>Then</span>
             </div>
@@ -33,9 +32,9 @@ export function IfBlock({ifParams}:TProps){
                 <TamplateBlock tamplate={Then}/>
             </div>
         </div>
-        <div style={{height:"5px"}}></div>
+
         {/* Else */}
-        <div>
+        <div style={{margin:"5px 0px"}}>
             <div>
                 <span>Else</span>
             </div>
@@ -43,6 +42,5 @@ export function IfBlock({ifParams}:TProps){
                 <TamplateBlock tamplate={Else}/>
             </div>
         </div>
-        <div style={{height:"5px"}}></div>
     </div>
 }

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { TamplatePreviewer } from "./index";
 
 const meta = {
-    title: 'Tamplate.Previewer/TamplatePreviewer',
+    title: 'Tamplate.Editor/TamplatePreviewer',
     component: TamplatePreviewer
 } satisfies Meta<typeof TamplatePreviewer>;
 

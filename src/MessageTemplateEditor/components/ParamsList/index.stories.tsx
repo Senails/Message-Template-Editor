@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ParamsList } from "./index";
 
 const meta = {
-    title: 'Tamplate.Editor/ParamsList',
+    title: 'Tamplate.Editor/components/ParamsList',
     component: ParamsList
 } satisfies Meta<typeof ParamsList>;
 
