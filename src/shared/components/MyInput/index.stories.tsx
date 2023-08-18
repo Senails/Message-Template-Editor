@@ -9,9 +9,15 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+let Vval = "";
+
 export const Primary: Story = {
     args :{
-        
-    }
+        type:"text",
+        name:"paramname",
+        placeholder:"name of param",
+        value:Vval,
+        onChange:(text:string)=>{Vval = text}
+    },
 };
 

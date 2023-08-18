@@ -15,7 +15,7 @@ const preview: Preview = {
       values: [
         {
           name: 'light',
-          value: '#FFFFFF',
+          value: '#ffffff',
         },
         {
           name: 'dark',

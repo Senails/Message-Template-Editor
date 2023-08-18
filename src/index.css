@@ -3,6 +3,9 @@
   padding: 0;
 
   font-family: Arial, Helvetica, sans-serif;
+
+  --TextShadow: 0px 0px 5px black;
+  --BoxShadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
 }
 
 .noselect {

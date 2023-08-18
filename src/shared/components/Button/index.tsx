@@ -5,7 +5,7 @@ type TProps = {
     onClick? : () => void
 }
 
-export function Button({name , onClick }:TProps){
+export function Button({name, onClick }:TProps){
     return <div className={styles.button + " noselect"} onClick={onClick}>
         {name}
     </div>

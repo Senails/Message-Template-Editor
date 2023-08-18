@@ -1,8 +1,9 @@
-import { ButtonList } from '../../shared/components/ButtonsList';
+import { Button } from '../../shared/components/Button';
 import { ParamsList } from './components/ParamsList';
+import { Ttamplate } from './types';
+
 import styles from './index.module.scss';
 
-type Ttamplate = any;
 type TProps = {
     params : Array<string>;
     tamplate? : Ttamplate;
@@ -18,10 +19,7 @@ export function TamplateEditor({params, tamplate}:TProps){
     function addIfBlock(){
         console.log("addIfBlock");
     }
-    function addSimpleBlock(){
-        console.log("addFreeBlock");
-    }
-    function removeBlock(){
+    function removeIfBlock(){
 
     }
 
@@ -40,20 +38,28 @@ export function TamplateEditor({params, tamplate}:TProps){
     
 
     return <div className = {styles.tamplateEditor}>
+        {/* ParamsList */}
         <ParamsList params={params} onClick={сlickParams}/>
 
-        <div style={{height:"10px"}}></div>
-        <ButtonList names={["+ Add If/Then/Else","+ Add Simple Block"]} justifyContent="center" onClick={(i)=>[addIfBlock,addSimpleBlock][i]()}/>
-        <div style={{height:"10px"}}></div>
+        {/* + Add If/Then/Else */}
+        <div style={{height:"20px"}}></div>
+            <div style={{display:"flex",justifyContent:"center"}}>
+                <div style={{margin:"5px"}}><Button name='+ Add If/Then/Else' onClick={addIfBlock}/></div>
+            </div>
+        <div style={{height:"20px"}}></div>
 
+        {/* Renderer */}
+        <div style={{height:"100px",border:"1px solid red"}}>
 
+        </div>
 
-        <div style={{height:"100px",border:"1px solid red"}}></div>
-
-
-
-        <div style={{height:"10px"}}></div>
-        <ButtonList names={["Preview","Save","Close"]} justifyContent="center" onClick={(i)=>[clickPreview,clickSave,clickClose][i]()}/>
-        <div style={{height:"10px"}}></div>
+        {/* Preview/Save/Close */}
+        <div style={{height:"20px"}}></div>
+            <div style={{display:"flex",justifyContent:"center"}}>
+                <div style={{margin:"5px"}}><Button name='Preview' onClick={clickPreview}/></div>
+                <div style={{margin:"5px"}}><Button name='Save' onClick={clickSave}/></div>
+                <div style={{margin:"5px"}}><Button name='Close' onClick={clickClose}/></div>
+            </div>
+        <div style={{height:"20px"}}></div>
     </div>
 }

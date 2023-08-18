@@ -1,0 +1,78 @@
+.MyTextareaConteiner{
+    width: 600px;
+    transition: 0.3s;
+    position: relative;
+
+    // border: 1px solid red;
+}
+
+.MyTextarea {
+    box-sizing: border-box;
+
+    width: 100%;
+    height: 65px;
+
+    border-radius: 10px;
+    padding: 10px;
+    margin: 0;
+
+    resize: none;
+    border: none;
+    outline: none;
+    overflow: hidden;
+
+    font-size: 20px;
+    line-height: 20px;
+
+    box-shadow: var(--BoxShadow);
+
+    &::-webkit-scrollbar {
+        width: 0px;
+    }
+    scrollbar-width: thin;
+    scrollbar-color: #00000000 #00000000;
+
+    transition: 0.3s;
+}
+
+.textForCheck{
+    position: absolute;
+    left: 0;
+    bottom: -50px;
+
+    box-sizing: border-box;
+    width: 100%;
+    height: 45px;
+
+    padding: 10px;
+    resize: none;
+    border: none;
+    outline: none;
+
+    font-size: 20px;
+    line-height: 20px;
+
+    &::-webkit-scrollbar {
+        width: 0px;
+    }
+    scrollbar-width: thin;
+    scrollbar-color: #00000000 #00000000;
+}
+
+.charsLimitInfo{
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+
+    width: 100%;
+    height: 24px;
+    // padding: 0 10px;
+    text-align: right;
+
+    span{
+        color: rgb(126, 126, 126);
+        font-size: 16px;
+        line-height: 16px;
+        margin: 5px;
+    }
+}

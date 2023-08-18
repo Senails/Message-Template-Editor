@@ -1,4 +1,4 @@
-import { ButtonList } from "../../../../shared/components/ButtonsList";
+import styles from './index.module.scss';
 
 type TProps = {
     params : string[];
@@ -6,5 +6,7 @@ type TProps = {
 }
 
 export function ParamsList({params, onClick}:TProps){
-    return <ButtonList names={params.map((e)=>`{${e}}`)} titel='Params' onClick={(i)=>onClick?.(params[i])}/>
+    return <div>
+
+    </div>
 }

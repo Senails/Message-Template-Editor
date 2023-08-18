@@ -1,0 +1,82 @@
+.MyInput{
+    position: relative;
+    height: 50px;
+    width: 250px;
+
+    // border: 1px solid red;
+    cursor: text;
+}
+.inputFon{
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+
+    height: 40px;
+    width: 100%;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+
+    padding-left: 10px;
+
+    box-shadow: var(--BoxShadow);
+}
+.realInput{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+
+
+    box-sizing: border-box;
+    width: calc(100% - 20px);
+    height: 20px;
+    background-color: rgba(0, 0, 0, 0) !important;
+
+    outline: none;
+    border: none;
+
+    font-size: 20px;
+    line-height: 20px;
+}
+
+
+.MyInput:hover,.MyInput.active{
+    .placeholderBlock{
+        top: 0px;
+    }
+    .placeholderText{
+        top: 0px;
+        left: 20px;
+
+        font-size: 14px;
+        line-height: 20px;
+
+        padding: 0px 7px;
+        opacity: 0.7;
+    }
+}
+.placeholderText{
+    position: absolute;
+    font-size: 20px;
+    line-height: 40px;
+
+    top: 10px;
+    left: 10px;
+
+    opacity: 0.6;
+    transition: 0.3s;
+}
+.placeholderBlock{
+    position: absolute;
+    top: 10px;
+    left: 20px;
+
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0);
+
+    line-height: 20px;
+    padding: 0px 7px;
+    border-radius: 100px;
+    background-color: white;
+
+    transition: 0.3s;
+}
