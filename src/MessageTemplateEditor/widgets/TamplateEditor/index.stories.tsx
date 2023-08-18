@@ -25,7 +25,18 @@ export const Primary: Story = {
             'namefdsfs3',
             'namfe2',
             'namefdsfs3',
-        ]
+        ],
+        tamplate:{
+            First:"123456",
+            Last:"7890",
+            IFblocks:[
+                {
+                    ifConditionParam:"isactve",
+                    Then:{First:"one"},
+                    Else:{First:"two"},
+                },
+            ]
+        }
     }
 };
 

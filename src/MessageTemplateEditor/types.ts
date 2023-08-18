@@ -7,6 +7,6 @@ export type IFblock = {
 
 export type Ttamplate = {
     First: string;
-    IFblock?: IFblock;
+    IFblocks?: IFblock[];
     Last?: string;
 }

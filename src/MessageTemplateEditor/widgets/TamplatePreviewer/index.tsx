@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Button } from '../../shared/components/Button';
-import { MyInput } from '../../shared/components/MyInput';
+import { Button } from '../../../shared/components/Button';
+import { MyInput } from '../../../shared/components/MyInput';
 import styles from './index.module.scss';
-import { UseTamplateMessage } from '../../shared/utils/UseMessageTamplate';
-import { Ttamplate } from '../TamplateEditor/types';
+import { UseTamplateMessage } from '../../utils/UseMessageTamplate';
+import { Ttamplate } from '../../types';
 
 type TProps = {
     params : Array<string>;
@@ -28,6 +28,7 @@ export function TamplatePreviewer({params, tamplate, onCloseClick}:TProps){
     }
 
     return <div className={styles.TamplatePreviewer}>
+        <div style={{height:"20px"}}></div>
         <h1 style={{textAlign:'center', color:"#ffffff"}}>Message Preview</h1>
         <div style={{height:"40px"}}></div>
 

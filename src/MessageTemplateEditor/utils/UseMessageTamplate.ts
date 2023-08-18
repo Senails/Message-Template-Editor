@@ -1,4 +1,4 @@
-import { Ttamplate } from "../../widgets/TamplateEditor/types";
+import { Ttamplate } from "../types";
 
 
 type Params = {
