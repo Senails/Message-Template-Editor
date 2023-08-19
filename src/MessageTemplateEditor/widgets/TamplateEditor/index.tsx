@@ -5,11 +5,11 @@ import { TamplateBlock } from '../../components/TamplateBlock';
 import { TTamplateStruct } from '../../types';
 
 import styles from './index.module.scss';
-import { CreateRecursiveCopyObject} from '../../../shared/utils/CreateRecursiveCopy/CreateRecursiveCopy';
+import { CreateRecursiveCopy} from '../../../shared/utils/CreateRecursiveCopy/CreateRecursiveCopy';
 
 type TProps = {
     params : Array<string>;
-    tamplate : TTamplateStruct;
+    tamplate? : TTamplateStruct;
     callbackSave ? : (tamplate: TTamplateStruct)=>Promise<void>
     onClickPreview? : (tamplate: TTamplateStruct)=>void;
     onClickClose? : ()=>void;
@@ -23,7 +23,7 @@ export type ChildrenPropsFunctions = {
 
 export function TamplateEditor(props:TProps){
     let {params, tamplate, callbackSave , onClickPreview, onClickClose} = props;
-    let [tamplateState, seTamplateStructState] = useState(tamplate);
+    let [tamplateState, seTamplateState] = useState(tamplate||{First:""});
 
     let lastInputPath = useRef<Array<string>>([]);
     let lastCursorPosition = useRef<number|null>(null);
@@ -37,7 +37,7 @@ export function TamplateEditor(props:TProps){
         let pos = lastCursorPosition.current;
         let text = GetValueByPath(path);
 
-        let copy = CreateRecursiveCopyObject(tamplateState!) as TTamplateStruct;
+        let copy = CreateRecursiveCopy(tamplateState!) as TTamplateStruct;
         let elem:any = copy;
         path.forEach((str,i)=>{if (i < path.length - 1) elem=elem[str];})
 
@@ -46,7 +46,7 @@ export function TamplateEditor(props:TProps){
         elem.Last = newLast;
         elem.IFblocks = {ifConditionParam:{First:""}, Then:{First:""}, Else:{First:""}}
 
-        seTamplateStructState(copy);
+        seTamplateState(copy);
     }
     function ClickParams(param: string){
         let path = lastInputPath.current.length > 0 ? lastInputPath.current : ["First"];
@@ -60,7 +60,7 @@ export function TamplateEditor(props:TProps){
 
 
     function DeleteIfBlock(path:string[]){
-        let copy = CreateRecursiveCopyObject(tamplateState!) as TTamplateStruct;
+        let copy = CreateRecursiveCopy(tamplateState!) as TTamplateStruct;
         let elem:any = copy;
         path.forEach((str,i)=>{ if (i !== path.length - 1) elem=elem[str]; })
 
@@ -69,16 +69,16 @@ export function TamplateEditor(props:TProps){
         elem.First += elem.Last!.First;
         elem.Last = elem.Last!.Last
 
-        seTamplateStructState(copy);
+        seTamplateState(copy);
     }
     function ChangeState(path:string[], newValue:string){
-        let copy = CreateRecursiveCopyObject(tamplateState!) as TTamplateStruct;
+        let copy = CreateRecursiveCopy(tamplateState!) as TTamplateStruct;
         let elem:any = copy;
         path.forEach((str,i)=>{
             if (i === path.length - 1) return elem[str]=newValue;
             elem=elem[str];
         })
-        seTamplateStructState(copy);
+        seTamplateState(copy);
     }
     function GetValueByPath(path:string[]):string{
         let elem:any = tamplateState;

@@ -23,7 +23,7 @@ export function MyTextArea(props:propsType){
             substring = event.currentTarget.value.slice(0, charsLimit);
         }
         onChange?.(substring);
-        OnChangeCursorPosition?.(event.currentTarget.selectionEnd);
+        CheckCursorPosition();
     }
     function CheckCursorPosition(){
         OnChangeCursorPosition?.(originElem.current!.selectionEnd);

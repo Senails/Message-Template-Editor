@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button } from '../../../shared/components/Button';
 import { MyInput } from '../../../shared/components/MyInput';
 import styles from './index.module.scss';
-import { UseTamplateMessage } from '../../utils/UseMessageTamplate';
+import { UseTamplateMessage } from '../../utils/UseTamplateMessage';
 import { TTamplateStruct } from '../../types';
 
 type TProps = {

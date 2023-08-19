@@ -1,20 +1,11 @@
 import { isPrimitive } from "util"
 
-
-export type Tree = {
-    [key:string] : string|Tree;
-}
-
-export function CreateRecursiveCopyObject(obj:Tree|string):Tree|string{
+export function CreateRecursiveCopy(obj:{[key:string]: any}):object{
     if (isPrimitive(obj)) return obj;
+    if (Array.isArray(obj)) return obj.map((elem)=>CreateRecursiveCopy(elem));
 
-    let obb = obj as Tree
-
-    let arrKeys: string[] = Object.keys(obj);
-    let copy: Tree = {};
-    arrKeys.forEach((key)=>{
-        copy[key] = CreateRecursiveCopyObject(obb[key]);
-    });
+    let copy: {[key:string]: any} = {};
+    for(let key in obj){copy[key] = CreateRecursiveCopy(obj[key]);}
 
     return copy;
 }
