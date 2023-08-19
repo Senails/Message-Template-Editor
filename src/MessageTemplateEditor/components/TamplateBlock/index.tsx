@@ -45,4 +45,4 @@ export const TamplateBlock = memo((props:TProps)=>{
             functions={props.functions}
         />}
     </div>
-},(prevProps,nextProps)=>RecursiveIsEqual(prevProps.tamplate,nextProps.tamplate))
+},(prevProps,nextProps)=>RecursiveIsEqual(prevProps.tamplate,nextProps.tamplate));

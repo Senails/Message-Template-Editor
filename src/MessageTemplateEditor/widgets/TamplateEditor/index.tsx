@@ -32,21 +32,22 @@ export function TamplateEditor(props:TProps){
     function AddIfBlock(){
         if (lastCursorPosition.current === null) return;
         if (lastInputPath.current.length === 0) return;
+        seTamplateState((prev)=>{
+            let path = lastInputPath.current;
+            let pos = lastCursorPosition.current;
+            let text = GetValueByPath(path);
 
-        let path = lastInputPath.current;
-        let pos = lastCursorPosition.current;
-        let text = GetValueByPath(path);
+            let copy = CreateRecursiveCopy(prev!) as TTamplateStruct;
+            let elem:any = copy;
+            path.forEach((str,i)=>{if (i < path.length - 1) elem=elem[str];})
 
-        let copy = CreateRecursiveCopy(tamplateState!) as TTamplateStruct;
-        let elem:any = copy;
-        path.forEach((str,i)=>{if (i < path.length - 1) elem=elem[str];})
+            let newLast = {First: text.slice(pos!), IFblocks: elem.IFblocks, Last: elem.Last,}
+            elem.First = text.slice(0,pos!);
+            elem.Last = newLast;
+            elem.IFblocks = {ifConditionParam:{First:""}, Then:{First:""}, Else:{First:""}} 
 
-        let newLast = {First: text.slice(pos), IFblocks: elem.IFblocks, Last: elem.Last,}
-        elem.First = text.slice(0,pos);
-        elem.Last = newLast;
-        elem.IFblocks = {ifConditionParam:{First:""}, Then:{First:""}, Else:{First:""}}
-
-        seTamplateState(copy);
+            return copy;
+        })
     }
     function ClickParams(param: string){
         let path = lastInputPath.current.length > 0 ? lastInputPath.current : ["First"];
@@ -60,25 +61,30 @@ export function TamplateEditor(props:TProps){
 
 
     function DeleteIfBlock(path:string[]){
-        let copy = CreateRecursiveCopy(tamplateState!) as TTamplateStruct;
-        let elem:any = copy;
-        path.forEach((str,i)=>{ if (i !== path.length - 1) elem=elem[str]; })
+        seTamplateState((prev)=>{
+            let copy = CreateRecursiveCopy(prev) as TTamplateStruct;
+            let elem:any = copy;
+            path.forEach((str,i)=>{ if (i !== path.length - 1) elem=elem[str]; })
 
-        delete elem.IFblocks;
-        elem.IFblocks = elem.Last!.IFblocks;
-        elem.First += elem.Last!.First;
-        elem.Last = elem.Last!.Last
+            delete elem.IFblocks;
+            elem.IFblocks = elem.Last!.IFblocks;
+            elem.First += elem.Last!.First;
+            elem.Last = elem.Last!.Last
 
-        seTamplateState(copy);
+            return copy;
+        });
     }
     function ChangeState(path:string[], newValue:string){
-        let copy = CreateRecursiveCopy(tamplateState!) as TTamplateStruct;
-        let elem:any = copy;
-        path.forEach((str,i)=>{
-            if (i === path.length - 1) return elem[str]=newValue;
-            elem=elem[str];
-        })
-        seTamplateState(copy);
+        seTamplateState((prev)=>{
+            let copy = CreateRecursiveCopy(prev) as TTamplateStruct;
+            let elem:any = copy;
+            path.forEach((str,i)=>{
+                if (i === path.length - 1) return elem[str]=newValue;
+                elem=elem[str];
+            })
+
+            return copy;
+        });
     }
     function GetValueByPath(path:string[]):string{
         let elem:any = tamplateState;

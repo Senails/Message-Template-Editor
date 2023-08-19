@@ -69,4 +69,4 @@ export const IfBlock = memo((props:TProps)=>{
             </div>
         </div>
     </div>
-},(prevProps,nextProps)=>RecursiveIsEqual(prevProps.ifParams,nextProps.ifParams))
+},(prevProps,nextProps)=>RecursiveIsEqual(prevProps.ifParams,nextProps.ifParams));
