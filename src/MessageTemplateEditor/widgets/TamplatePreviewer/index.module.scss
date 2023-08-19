@@ -6,6 +6,10 @@
         color: white;
         text-shadow: var(--TextShadow);
     }
+
+    >*{
+        margin: 25px 0;
+    }
 }
 
 .variablesConteiner{

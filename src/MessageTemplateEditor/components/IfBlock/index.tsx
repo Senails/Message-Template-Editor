@@ -27,7 +27,7 @@ export const IfBlock = memo((props:TProps)=>{
 
     return <div className={styles.IfBlock}>
         {/* if */}
-        <div style={{marginTop:"5px"}}>
+        <div>
             <div style={{paddingTop:"7px"}}>
                 <span>If</span>
                 <Button name={"delete"} onClick={DeleteClick}/>
@@ -42,10 +42,8 @@ export const IfBlock = memo((props:TProps)=>{
         </div>
 
         {/* Then */}
-        <div style={{marginTop:"5px"}}>
-            <div>
-                <span>Then</span>
-            </div>
+        <div>
+            <div><span>Then</span></div>
             <div className={styles.TextAreaConteiner}>
                 <TamplateBlock 
                     tamplate={Then} 
@@ -56,10 +54,8 @@ export const IfBlock = memo((props:TProps)=>{
         </div>
 
         {/* Else */}
-        <div style={{margin:"5px 0px"}}>
-            <div>
-                <span>Else</span>
-            </div>
+        <div>
+            <div><span>Else</span></div>
             <div className={styles.TextAreaConteiner}>
                 <TamplateBlock 
                     tamplate={Else} 

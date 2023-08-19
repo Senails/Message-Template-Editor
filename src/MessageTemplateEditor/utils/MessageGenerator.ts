@@ -4,7 +4,6 @@ type Params = {
     [key:string] : string;
 }
 
-
 export function MessageGenerator(params:Params, tamplate:TTamplateStruct):string{
     const MyReplace = (paramsEntries:[string, string][], text: string)=>{
         if (text === "") return "";

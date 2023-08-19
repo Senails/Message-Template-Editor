@@ -29,15 +29,15 @@ export function TamplatePreviewer({params, tamplate, onCloseClick}:TProps){
     
     
     return <div className={styles.TamplatePreviewer}>
-        <h1 style={{marginTop:"20px"}}>Message Preview</h1>
+        <h1>Message Preview</h1>
 
         {/* Message Text */}
-        <p className={styles.resultMessage} style={{marginTop:"20px"}}>
+        <p className={styles.resultMessage}>
             {ComposeMessage()}
         </p>
 
         {/* Variables: */}
-        <div className={styles.variablesConteiner} style={{marginTop:"20px"}}>
+        <div className={styles.variablesConteiner}>
             <p>Variables:</p>
             {paramsState.map((elem, i)=><div style={{width:"200px"}} key = {i}>
                 <MyInput 
@@ -51,7 +51,7 @@ export function TamplatePreviewer({params, tamplate, onCloseClick}:TProps){
         </div>
 
         {/* close button */}
-        <div style={{display:"flex", justifyContent:"center",margin:"40px 0"}}>
+        <div style={{display:"flex", justifyContent:"center"}}>
             <Button name='Close' onClick={onCloseClick}/>
         </div>
     </div>
