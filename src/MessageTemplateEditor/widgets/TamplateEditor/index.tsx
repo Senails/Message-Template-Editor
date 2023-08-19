@@ -2,16 +2,16 @@ import { useRef, useState } from 'react';
 import { Button } from '../../../shared/components/Button';
 import { ParamsList } from '../../components/ParamsList';
 import { TamplateBlock } from '../../components/TamplateBlock';
-import { TtamplateStruct } from '../../types';
+import { TTamplateStruct } from '../../types';
 
 import styles from './index.module.scss';
 import { CreateRecursiveCopyObject} from '../../../shared/utils/CreateRecursiveCopy/CreateRecursiveCopy';
 
 type TProps = {
     params : Array<string>;
-    tamplate : TtamplateStruct;
-    saveTamplate? : (tamplate: TtamplateStruct)=>Promise<void>
-    onClickPreview? : (tamplate: TtamplateStruct)=>void;
+    tamplate : TTamplateStruct;
+    callbackSave ? : (tamplate: TTamplateStruct)=>Promise<void>
+    onClickPreview? : (tamplate: TTamplateStruct)=>void;
     onClickClose? : ()=>void;
 }
 
@@ -22,8 +22,8 @@ export type ChildrenPropsFunctions = {
 }
 
 export function TamplateEditor(props:TProps){
-    let {params, tamplate, saveTamplate, onClickPreview, onClickClose} = props;
-    let [tamplateState, seTtamplateStructState] = useState(tamplate);
+    let {params, tamplate, callbackSave , onClickPreview, onClickClose} = props;
+    let [tamplateState, seTamplateStructState] = useState(tamplate);
 
     let lastInputPath = useRef<Array<string>>([]);
     let lastCursorPosition = useRef<number|null>(null);
@@ -37,7 +37,7 @@ export function TamplateEditor(props:TProps){
         let pos = lastCursorPosition.current;
         let text = GetValueByPath(path);
 
-        let copy = CreateRecursiveCopyObject(tamplateState!) as TtamplateStruct;
+        let copy = CreateRecursiveCopyObject(tamplateState!) as TTamplateStruct;
         let elem:any = copy;
         path.forEach((str,i)=>{if (i < path.length - 1) elem=elem[str];})
 
@@ -46,13 +46,13 @@ export function TamplateEditor(props:TProps){
         elem.Last = newLast;
         elem.IFblocks = {ifConditionParam:{First:""}, Then:{First:""}, Else:{First:""}}
 
-        seTtamplateStructState(copy);
+        seTamplateStructState(copy);
     }
     function ClickParams(param: string){
         let path = lastInputPath.current.length > 0 ? lastInputPath.current : ["First"];
         let oldValue = GetValueByPath(path);
 
-        let pos = lastCursorPosition.current || oldValue.length;
+        let pos = lastCursorPosition.current === null? oldValue.length : lastCursorPosition.current;
         let newValue = oldValue.slice(0,pos)+`{${param}}`+oldValue.slice(pos);
 
         ChangeState(path,newValue);
@@ -60,7 +60,7 @@ export function TamplateEditor(props:TProps){
 
 
     function DeleteIfBlock(path:string[]){
-        let copy = CreateRecursiveCopyObject(tamplateState!) as TtamplateStruct;
+        let copy = CreateRecursiveCopyObject(tamplateState!) as TTamplateStruct;
         let elem:any = copy;
         path.forEach((str,i)=>{ if (i !== path.length - 1) elem=elem[str]; })
 
@@ -69,16 +69,16 @@ export function TamplateEditor(props:TProps){
         elem.First += elem.Last!.First;
         elem.Last = elem.Last!.Last
 
-        seTtamplateStructState(copy);
+        seTamplateStructState(copy);
     }
     function ChangeState(path:string[], newValue:string){
-        let copy = CreateRecursiveCopyObject(tamplateState!) as TtamplateStruct;
+        let copy = CreateRecursiveCopyObject(tamplateState!) as TTamplateStruct;
         let elem:any = copy;
         path.forEach((str,i)=>{
             if (i === path.length - 1) return elem[str]=newValue;
             elem=elem[str];
         })
-        seTtamplateStructState(copy);
+        seTamplateStructState(copy);
     }
     function GetValueByPath(path:string[]):string{
         let elem:any = tamplateState;
@@ -122,7 +122,7 @@ export function TamplateEditor(props:TProps){
         {/* Preview/Save/Close */}
         <div style={{display:"flex",justifyContent:"center",margin:"40px 0px"}}>
             <div style={{margin:"5px"}}><Button name='Preview' onClick={()=>onClickPreview?.(tamplateState)}/></div>
-            <div style={{margin:"5px"}}><Button name='Save' onClick={()=>saveTamplate?.(tamplateState)}/></div>
+            <div style={{margin:"5px"}}><Button name='Save' onClick={()=>callbackSave?.(tamplateState)}/></div>
             <div style={{margin:"5px"}}><Button name='Close' onClick={onClickClose}/></div>
         </div>
     </div>

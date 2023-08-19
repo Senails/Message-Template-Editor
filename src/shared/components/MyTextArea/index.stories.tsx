@@ -3,14 +3,17 @@ import { MyTextArea } from "./index";
 import { useState } from 'react';
 
 
+
 let Component = ()=>{
     let [text,setText]=useState("");
-    return <MyTextArea 
-        value={text} 
-        onChange={setText} 
-        placeholder='placeholder'
-        charsLimit={500}
-    />
+
+    return <div style={{maxWidth:"500px"}}>
+        <MyTextArea 
+            value={text} 
+            onChange={setText} 
+            placeholder='placeholder'
+        />
+    </div>
 }
 
 
@@ -22,6 +25,5 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
-};
+export const Primary: Story = {};
 

@@ -3,11 +3,11 @@ import { Button } from '../../../shared/components/Button';
 import { MyInput } from '../../../shared/components/MyInput';
 import styles from './index.module.scss';
 import { UseTamplateMessage } from '../../utils/UseMessageTamplate';
-import { TtamplateStruct } from '../../types';
+import { TTamplateStruct } from '../../types';
 
 type TProps = {
     params : Array<string>;
-    tamplate : TtamplateStruct;
+    tamplate : TTamplateStruct;
     onCloseClick?: ()=>void;
 }
 

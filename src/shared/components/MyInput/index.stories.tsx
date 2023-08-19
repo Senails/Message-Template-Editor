@@ -9,7 +9,7 @@ let Component = ()=>{
     return <div style={{maxWidth:"200px"}}>
         <MyInput 
         value={text} 
-        placeholder='name of param' 
+        placeholder='placeholder' 
         onChange={setText}
         />
     </div>
