@@ -9,6 +9,10 @@ type TProps = {
 export function ParamsList({params, onClick}:TProps){
     return <div className={styles.ParamsList}>
         <p>Parametrs:</p>
-        {params.map((str, i)=><Button name={`{${str}}`} key={i} onClick={()=>onClick?.(str)}/>)}
+        {params.map((str, i)=><Button 
+            name={`{${str}}`}
+            key={i} 
+            onClick={()=>onClick?.(str)}
+        />)}
     </div>
 }

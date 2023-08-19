@@ -5,7 +5,14 @@ import { useState } from 'react';
 
 let Component = ()=>{
     let [text,setText]=useState("");
-    return <MyInput value={text} onChange={setText} placeholder='name of param'/>
+
+    return <div style={{maxWidth:"200px"}}>
+        <MyInput 
+        value={text} 
+        placeholder='name of param' 
+        onChange={setText}
+        />
+    </div>
 }
 
 

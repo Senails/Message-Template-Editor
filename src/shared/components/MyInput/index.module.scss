@@ -1,9 +1,10 @@
 .MyInput{
     position: relative;
     height: 50px;
-    width: 250px;
+    width: 100%;
+    min-width: 100px;
 
-    // border: 1px solid red;
+
     cursor: text;
 }
 .inputFon{

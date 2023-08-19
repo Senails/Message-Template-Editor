@@ -12,7 +12,8 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
     args :{
         name : 'name',
-        onClick : ()=>console.log(1)
+        onClick : ()=>console.log(1),
+        textSelectable:false,
     }
 };
 

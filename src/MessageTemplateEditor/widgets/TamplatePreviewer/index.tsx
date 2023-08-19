@@ -39,9 +39,14 @@ export function TamplatePreviewer({params, tamplate, onCloseClick}:TProps){
         {/* Variables: */}
         <div className={styles.variablesConteiner} style={{marginTop:"20px"}}>
             <p>Variables:</p>
-            {paramsState.map((elem, i) => 
-            <MyInput value = {elem[1]} placeholder = {elem[0]} key = {i}
-            onChange={(newValue) => ChangeParams(i, newValue)} />)}
+            {paramsState.map((elem, i)=><div style={{width:"200px"}} key = {i}>
+                <MyInput 
+                value = {elem[1]} 
+                placeholder = {elem[0]} 
+                onChange={(newValue) => ChangeParams(i, newValue)} 
+                />
+            </div>)
+            }
         </div>
 
         {/* close button */}

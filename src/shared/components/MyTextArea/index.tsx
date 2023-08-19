@@ -6,9 +6,11 @@ type propsType = {
     placeholder?: string,
     charsLimit?: number,
     onChange?: (value:string) => void,
+    OnChangeCursorPosition?: (cursorPosition : number|null) => void
 }
 
-export function MyTextArea({value, placeholder, charsLimit, onChange}:propsType){
+export function MyTextArea(props:propsType){
+    let {value, placeholder, charsLimit, onChange, OnChangeCursorPosition} = props;
     let [Height, setHeight] = useState<number|undefined>();
 
     let originElem = useRef<HTMLTextAreaElement>(null);
@@ -21,6 +23,10 @@ export function MyTextArea({value, placeholder, charsLimit, onChange}:propsType)
             substring = event.currentTarget.value.slice(0, charsLimit);
         }
         onChange?.(substring);
+        OnChangeCursorPosition?.(event.currentTarget.selectionEnd);
+    }
+    function CheckCursorPosition(){
+        OnChangeCursorPosition?.(originElem.current!.selectionEnd);
     }
     function Resize(){
         if (checkElem.current!.scrollHeight + 20 !== originElem.current!.clientHeight){
@@ -37,6 +43,9 @@ export function MyTextArea({value, placeholder, charsLimit, onChange}:propsType)
         placeholder={placeholder}
         value={value}
         onChange={InnerOnChange}
+        onClick={CheckCursorPosition}
+        onSelect={CheckCursorPosition}
+
         style={{height:`${Height}px`}}
         ></textarea>
 

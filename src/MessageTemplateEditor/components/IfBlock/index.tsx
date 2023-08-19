@@ -1,26 +1,24 @@
+import { memo } from 'react';
 import { Button } from '../../../shared/components/Button';
-import { MyInput } from '../../../shared/components/MyInput';
 import { IFblock } from '../../types';
 import { TamplateBlock } from '../TamplateBlock';
 import styles from './index.module.scss';
+import { ChildrenPropsFunctions } from '../../widgets/TamplateEditor';
+import { RecusiveIsEqual } from '../../../shared/utils/RecusiveIsEqual/RecusiveIsEqual';
 
 type TProps = {
     ifParams: IFblock;
     path: string[];
-    ChangeState:(path:string[], newvalue:string)=>void;
-    DeleteIfBlock:(path:string[])=>void;
+    functions: ChildrenPropsFunctions;
 }
 
-export function IfBlock(props:TProps){
-    let {ifParams, path, ChangeState, DeleteIfBlock} = props;
+export const IfBlock = memo((props:TProps)=>{
+    let {ifParams, path} = props;
+    let {DeleteIfBlock} = props.functions; 
+
     const {ifConditionParam, Then, Else} = ifParams;
-    
     let myPath = [...path, "ifConditionParam"];
 
-
-    function OnChangeInput(newValue: string){
-        ChangeState?.(myPath, newValue);
-    }
     function DeleteClick(){
         DeleteIfBlock?.(path);
     }
@@ -28,16 +26,16 @@ export function IfBlock(props:TProps){
 
     return <div className={styles.IfBlock}>
         {/* if */}
-        <div style={{height:"60px",marginTop:"5px"}}>
+        <div style={{marginTop:"5px"}}>
             <div style={{paddingTop:"7px"}}>
                 <span>If</span>
                 <Button name={"delete"} onClick={DeleteClick}/>
             </div>
             <div className={styles.TextAreaConteiner}>
-                <MyInput 
-                    value={ifConditionParam} 
-                    placeholder={"param name"} 
-                    onChange={OnChangeInput}
+                <TamplateBlock 
+                    tamplate={ifConditionParam} 
+                    path={myPath} 
+                    functions={props.functions}
                 />
             </div>
         </div>
@@ -51,8 +49,7 @@ export function IfBlock(props:TProps){
                 <TamplateBlock 
                     tamplate={Then} 
                     path={[...path,"Then"]} 
-                    ChangeState={ChangeState}
-                    DeleteIfBlock={DeleteIfBlock}
+                    functions={props.functions}
                 />
             </div>
         </div>
@@ -66,10 +63,9 @@ export function IfBlock(props:TProps){
                 <TamplateBlock 
                     tamplate={Else} 
                     path={[...path,"Else"]}
-                    ChangeState={ChangeState}
-                    DeleteIfBlock={DeleteIfBlock}
+                    functions={props.functions}
                 />
             </div>
         </div>
     </div>
-}
+},(prevProps,nextProps)=>RecusiveIsEqual(prevProps.ifParams,nextProps.ifParams))

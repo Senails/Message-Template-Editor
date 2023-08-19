@@ -1,21 +1,25 @@
-
+import { memo } from 'react';
 import { MyTextArea } from '../../../shared/components/MyTextArea';
 import { Ttamplate } from '../../types';
 import { IfBlock } from '../IfBlock';
 import styles from './index.module.scss';
+import { ChildrenPropsFunctions } from '../../widgets/TamplateEditor';
+import { RecusiveIsEqual } from '../../../shared/utils/RecusiveIsEqual/RecusiveIsEqual';
+
 
 type TProps = {
     tamplate: Ttamplate;
     path: string[];
-    ChangeState: (path:string[], newvalue:string) => void;
-    DeleteIfBlock: (path:string[]) => void;
+    functions: ChildrenPropsFunctions;
 }
 
-export function TamplateBlock(props:TProps){
-    let {tamplate, path, ChangeState, DeleteIfBlock } = props;
+export const TamplateBlock = memo((props:TProps)=>{
+    let {tamplate, path} = props;
+    let {ChangeState, OnChangeCursorPosition} = props.functions; 
+    
     let myPath = [...path, "First"];
 
-    
+
     function OnChangeTextArea(newValue: string){
         ChangeState?.(myPath, newValue);
     }
@@ -25,21 +29,20 @@ export function TamplateBlock(props:TProps){
         <MyTextArea 
             value={tamplate.First} 
             onChange={OnChangeTextArea}
+            OnChangeCursorPosition = {(num)=>OnChangeCursorPosition(myPath,num)}
         />
 
         {tamplate.IFblocks&&<IfBlock 
             ifParams={tamplate.IFblocks} 
             path={[...path, "IFblocks"]}
-            ChangeState={ChangeState}
-            DeleteIfBlock={DeleteIfBlock}
+            functions={props.functions}
         />}
         
         {tamplate.Last&&
         <TamplateBlock 
             tamplate={tamplate.Last} 
             path={[...path, "Last"]}
-            ChangeState={ChangeState}
-            DeleteIfBlock={DeleteIfBlock}
+            functions={props.functions}
         />}
     </div>
-}
+},(prevProps,nextProps)=>RecusiveIsEqual(prevProps.tamplate,nextProps.tamplate))

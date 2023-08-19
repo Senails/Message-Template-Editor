@@ -9,14 +9,19 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const primary: Story = {
+export const Primary: Story = {
     args:{
         ifParams:{
-            ifConditionParam:"isactve",
+            ifConditionParam:{First:"condition"},
             Then:{First:"one"},
             Else:{First:"two"},
         },
-        path:[]
+        path:[],
+        functions:{
+            DeleteIfBlock: ()=>{},
+            ChangeState: ()=>{},
+            OnChangeCursorPosition: ()=>{}
+        }
     }
 };
 

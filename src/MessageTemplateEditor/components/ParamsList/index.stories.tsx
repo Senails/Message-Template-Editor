@@ -18,7 +18,7 @@ let names = [
     'namfe2',
 ];
 
-export const primary: Story = {
+export const Primary: Story = {
     args :{
         params : names,
         onClick(name) {

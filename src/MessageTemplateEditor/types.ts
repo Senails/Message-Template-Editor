@@ -1,6 +1,6 @@
 
 export type IFblock = {
-    ifConditionParam: string;
+    ifConditionParam: Ttamplate;
     Then: Ttamplate;
     Else: Ttamplate;
 }
