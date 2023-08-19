@@ -2,16 +2,16 @@ import { useRef, useState } from 'react';
 import { Button } from '../../../shared/components/Button';
 import { ParamsList } from '../../components/ParamsList';
 import { TamplateBlock } from '../../components/TamplateBlock';
-import { Ttamplate } from '../../types';
+import { TtamplateStruct } from '../../types';
 
 import styles from './index.module.scss';
 import { CreateRecursiveCopyObject} from '../../../shared/utils/CreateRecursiveCopy/CreateRecursiveCopy';
 
 type TProps = {
     params : Array<string>;
-    tamplate : Ttamplate;
-    saveTamplate? : (tamplate: Ttamplate)=>Promise<void>
-    onClickPreview? : (tamplate: Ttamplate)=>void;
+    tamplate : TtamplateStruct;
+    saveTamplate? : (tamplate: TtamplateStruct)=>Promise<void>
+    onClickPreview? : (tamplate: TtamplateStruct)=>void;
     onClickClose? : ()=>void;
 }
 
@@ -23,7 +23,7 @@ export type ChildrenPropsFunctions = {
 
 export function TamplateEditor(props:TProps){
     let {params, tamplate, saveTamplate, onClickPreview, onClickClose} = props;
-    let [tamplateState, setTamplateState] = useState(tamplate);
+    let [tamplateState, seTtamplateStructState] = useState(tamplate);
 
     let lastInputPath = useRef<Array<string>>([]);
     let lastCursorPosition = useRef<number|null>(null);
@@ -37,7 +37,7 @@ export function TamplateEditor(props:TProps){
         let pos = lastCursorPosition.current;
         let text = GetValueByPath(path);
 
-        let copy = CreateRecursiveCopyObject(tamplateState!) as Ttamplate;
+        let copy = CreateRecursiveCopyObject(tamplateState!) as TtamplateStruct;
         let elem:any = copy;
         path.forEach((str,i)=>{if (i < path.length - 1) elem=elem[str];})
 
@@ -46,7 +46,7 @@ export function TamplateEditor(props:TProps){
         elem.Last = newLast;
         elem.IFblocks = {ifConditionParam:{First:""}, Then:{First:""}, Else:{First:""}}
 
-        setTamplateState(copy);
+        seTtamplateStructState(copy);
     }
     function ClickParams(param: string){
         let path = lastInputPath.current.length > 0 ? lastInputPath.current : ["First"];
@@ -60,7 +60,7 @@ export function TamplateEditor(props:TProps){
 
 
     function DeleteIfBlock(path:string[]){
-        let copy = CreateRecursiveCopyObject(tamplateState!) as Ttamplate;
+        let copy = CreateRecursiveCopyObject(tamplateState!) as TtamplateStruct;
         let elem:any = copy;
         path.forEach((str,i)=>{ if (i !== path.length - 1) elem=elem[str]; })
 
@@ -69,16 +69,16 @@ export function TamplateEditor(props:TProps){
         elem.First += elem.Last!.First;
         elem.Last = elem.Last!.Last
 
-        setTamplateState(copy);
+        seTtamplateStructState(copy);
     }
     function ChangeState(path:string[], newValue:string){
-        let copy = CreateRecursiveCopyObject(tamplateState!) as Ttamplate;
+        let copy = CreateRecursiveCopyObject(tamplateState!) as TtamplateStruct;
         let elem:any = copy;
         path.forEach((str,i)=>{
             if (i === path.length - 1) return elem[str]=newValue;
             elem=elem[str];
         })
-        setTamplateState(copy);
+        seTtamplateStructState(copy);
     }
     function GetValueByPath(path:string[]):string{
         let elem:any = tamplateState;

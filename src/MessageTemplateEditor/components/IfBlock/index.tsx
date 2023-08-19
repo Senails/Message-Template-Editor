@@ -1,13 +1,13 @@
 import { memo } from 'react';
 import { Button } from '../../../shared/components/Button';
-import { IFblock } from '../../types';
+import { IFBlockStruct } from '../../types';
 import { TamplateBlock } from '../TamplateBlock';
 import styles from './index.module.scss';
 import { ChildrenPropsFunctions } from '../../widgets/TamplateEditor';
 import { RecusiveIsEqual } from '../../../shared/utils/RecusiveIsEqual/RecusiveIsEqual';
 
 type TProps = {
-    ifParams: IFblock;
+    ifParams: IFBlockStruct;
     path: string[];
     functions: ChildrenPropsFunctions;
 }

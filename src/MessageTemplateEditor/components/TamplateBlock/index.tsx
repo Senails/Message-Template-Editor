@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { MyTextArea } from '../../../shared/components/MyTextArea';
-import { Ttamplate } from '../../types';
+import { TtamplateStruct } from '../../types';
 import { IfBlock } from '../IfBlock';
 import styles from './index.module.scss';
 import { ChildrenPropsFunctions } from '../../widgets/TamplateEditor';
@@ -8,7 +8,7 @@ import { RecusiveIsEqual } from '../../../shared/utils/RecusiveIsEqual/RecusiveI
 
 
 type TProps = {
-    tamplate: Ttamplate;
+    tamplate: TtamplateStruct;
     path: string[];
     functions: ChildrenPropsFunctions;
 }

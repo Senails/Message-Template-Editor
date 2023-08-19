@@ -1,12 +1,11 @@
-
-export type IFblock = {
-    ifConditionParam: Ttamplate;
-    Then: Ttamplate;
-    Else: Ttamplate;
+export type IFBlockStruct = {
+    ifConditionParam: TtamplateStruct;
+    Then: TtamplateStruct;
+    Else: TtamplateStruct;
 }
 
-export type Ttamplate = {
+export type TtamplateStruct = {
     First: string;
-    IFblocks?: IFblock;
-    Last?: Ttamplate;
+    IFblocks?: IFBlockStruct;
+    Last?: TtamplateStruct;
 }
