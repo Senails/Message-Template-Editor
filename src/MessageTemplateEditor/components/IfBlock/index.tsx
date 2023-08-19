@@ -19,6 +19,7 @@ export const IfBlock = memo((props:TProps)=>{
     const {ifConditionParam, Then, Else} = ifParams;
     let myPath = [...path, "ifConditionParam"];
 
+
     function DeleteClick(){
         DeleteIfBlock?.(path);
     }
