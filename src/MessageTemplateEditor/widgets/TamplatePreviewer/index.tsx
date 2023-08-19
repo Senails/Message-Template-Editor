@@ -26,7 +26,7 @@ export function TamplatePreviewer({params, tamplate, onCloseClick}:TProps){
         })
         return MessageGenerator(obj,tamplate);
     }
-
+    
     
     return <div className={styles.TamplatePreviewer}>
         <h1 style={{marginTop:"20px"}}>Message Preview</h1>
@@ -41,7 +41,8 @@ export function TamplatePreviewer({params, tamplate, onCloseClick}:TProps){
             <p>Variables:</p>
             {paramsState.map((elem, i)=><div style={{width:"200px"}} key = {i}>
                 <MyInput 
-                value = {elem[1]} 
+                value = {elem[1]}
+                name={elem[1]}
                 placeholder = {elem[0]} 
                 onChange={(newValue) => ChangeParams(i, newValue)} 
                 />

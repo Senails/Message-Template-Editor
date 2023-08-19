@@ -9,7 +9,21 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const One: Story = {
+    args:{
+        tamplate:{
+            First:"123456",
+        },
+        path:[],
+        functions:{
+            DeleteIfBlock: ()=>{},
+            ChangeState: ()=>{},
+            OnChangeCursorPosition: ()=>{}
+        }
+    }
+};
+
+export const Many: Story = {
     args:{
         tamplate:{
             First:"123456",
@@ -28,4 +42,3 @@ export const Primary: Story = {
         }
     }
 };
-

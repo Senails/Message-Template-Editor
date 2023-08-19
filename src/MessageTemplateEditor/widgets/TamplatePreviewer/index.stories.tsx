@@ -13,33 +13,33 @@ export const Primary: Story = {
     args:{
         params :["firstname", "lastname", "company", "position"],
         tamplate: {
-            First:"Hello, {firstname}!",
+            First:"{firstname}|___ parametr on start string",
             IFblocks:{
                 ifConditionParam: {
                     First:"{lastname}"
                 },
                 Then:{
-                    First:"Your lastname is {lastname}"
+                    First:"\nparametr on endOfString ____1111|{lastname}"
                 },
                 Else:{
-                    First:"What your lastname?"
+                    First:"\nparametr on endOfString ____2222|{lastname}"
                 }
             },
             Last:{
                 First:"",
                 IFblocks:{
                     ifConditionParam: {
-                        First:"{position}"
+                        First:"{company}"
                     },
                     Then:{
-                        First:"Are your in {position}?"
+                        First:"\nparametr on Center ____| {company} |___ "
                     },
                     Else:{
-                        First:"Where are your?"
+                        First:"\nparametr on Center ____| {company} |___ "
                     }
                 },
                 Last:{
-                    First:"{company} send to give you manual"
+                    First:"\nmany space            {position}          "
                 }
             }
         }

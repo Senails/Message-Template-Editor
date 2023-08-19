@@ -23,21 +23,38 @@ export const TamplateBlock = memo((props:TProps)=>{
     function OnChangeTextArea(newValue: string){
         ChangeState?.(myPath, newValue);
     }
-
+    function TogleNewLine(){
+        if (tamplate.First[0]==="\n"){
+            ChangeState(myPath,tamplate.First.slice(1));
+        } else ChangeState(myPath,"\n"+tamplate.First);
+    }
 
     return <div className={styles.TamplateBlock}>
-        <MyTextArea 
-            value={tamplate.First} 
-            onChange={OnChangeTextArea}
-            OnChangeCursorPosition = {(num)=>OnChangeCursorPosition(myPath,num)}
-        />
+        {/* First */}
+        <div style={{position:"relative"}}>
+            <MyTextArea 
+                value={tamplate.First} 
+                onChange={OnChangeTextArea}
+                OnChangeCursorPosition = {(num)=>OnChangeCursorPosition(myPath,num)}
+            />
 
+            {/* togle checkbox for new line */}
+            <span className={styles.checkBox+" noselect"}>
+                new line {`(${tamplate.First[0]==="\n"?"enabled":"disnabled"})   `}
+                <span style={{cursor:"pointer"}} onClick={TogleNewLine}>
+                    {`[click]`}
+                </span>
+            </span>
+        </div>
+
+        {/* IF */}
         {tamplate.IFblocks&&<IfBlock 
             ifParams={tamplate.IFblocks} 
             path={[...path, "IFblocks"]}
             functions={props.functions}
         />}
         
+        {/* Last */}
         {tamplate.Last&&
         <TamplateBlock 
             tamplate={tamplate.Last} 

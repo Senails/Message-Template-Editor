@@ -27,7 +27,7 @@ export const Primary: Story = {
             'namefdsfs3',
         ],
         tamplate:{
-            First:"Hello, {firstname}!",
+            First:"Hello {firstname}!",
             IFblocks:{
                 ifConditionParam: {
                     First:"{lastname}"
@@ -53,7 +53,7 @@ export const Primary: Story = {
                     }
                 },
                 Last:{
-                    First:"{company} send to give you manual"
+                    First:"{company} want to give you manual"
                 }
             }
         }
