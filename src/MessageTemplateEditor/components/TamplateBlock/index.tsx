@@ -4,7 +4,7 @@ import { TTamplateStruct } from '../../types';
 import { IfBlock } from '../IfBlock';
 import styles from './index.module.scss';
 import { ChildrenPropsFunctions } from '../../widgets/TamplateEditor';
-import { RecusiveIsEqual } from '../../../shared/utils/RecusiveIsEqual/RecusiveIsEqual';
+import { RecursiveIsEqual } from '../../../shared/utils/RecursiveIsEqual/RecursiveIsEqual';
 
 
 type TProps = {
@@ -45,4 +45,4 @@ export const TamplateBlock = memo((props:TProps)=>{
             functions={props.functions}
         />}
     </div>
-},(prevProps,nextProps)=>RecusiveIsEqual(prevProps.tamplate,nextProps.tamplate))
+},(prevProps,nextProps)=>RecursiveIsEqual(prevProps.tamplate,nextProps.tamplate))

@@ -1,7 +1,7 @@
-import { isPrimitive } from "util"
+import { IsPrimitive } from "../IsPrimitive/IsPrimitive";
 
 export function CreateRecursiveCopy(obj:{[key:string]: any}):object{
-    if (isPrimitive(obj)) return obj;
+    if (IsPrimitive(obj)) return obj;
     if (Array.isArray(obj)) return obj.map((elem)=>CreateRecursiveCopy(elem));
 
     let copy: {[key:string]: any} = {};

@@ -4,7 +4,7 @@ import { IFBlockStruct } from '../../types';
 import { TamplateBlock } from '../TamplateBlock';
 import styles from './index.module.scss';
 import { ChildrenPropsFunctions } from '../../widgets/TamplateEditor';
-import { RecusiveIsEqual } from '../../../shared/utils/RecusiveIsEqual/RecusiveIsEqual';
+import { RecursiveIsEqual } from '../../../shared/utils/RecursiveIsEqual/RecursiveIsEqual';
 
 type TProps = {
     ifParams: IFBlockStruct;
@@ -69,4 +69,4 @@ export const IfBlock = memo((props:TProps)=>{
             </div>
         </div>
     </div>
-},(prevProps,nextProps)=>RecusiveIsEqual(prevProps.ifParams,nextProps.ifParams))
+},(prevProps,nextProps)=>RecursiveIsEqual(prevProps.ifParams,nextProps.ifParams))

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button } from '../../../shared/components/Button';
 import { MyInput } from '../../../shared/components/MyInput';
 import styles from './index.module.scss';
-import { UseTamplateMessage } from '../../utils/UseTamplateMessage';
+import { MessageGenerator } from '../../utils/MessageGenerator';
 import { TTamplateStruct } from '../../types';
 
 type TProps = {
@@ -24,7 +24,7 @@ export function TamplatePreviewer({params, tamplate, onCloseClick}:TProps){
         paramsState.forEach((elem)=>{
             obj[elem[0]] = elem[1];
         })
-        return UseTamplateMessage(obj,tamplate);
+        return MessageGenerator(obj,tamplate);
     }
 
     

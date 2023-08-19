@@ -27,29 +27,35 @@ export const Primary: Story = {
             'namefdsfs3',
         ],
         tamplate:{
-            First:"123456",
+            First:"Hello, {firstname}!",
             IFblocks:{
-                ifConditionParam:{First:"condition"},
-                Then:{
-                    First:"one",
-                    Last:{First:"67890"},
-                    IFblocks:{
-                        ifConditionParam:{First:"condition"},
-                        Then:{First:"one"},
-                        Else:{First:"two"},
-                    }
+                ifConditionParam: {
+                    First:"{lastname}"
                 },
-                Else:{First:"two"},
+                Then:{
+                    First:"Your lastname is {lastname}"
+                },
+                Else:{
+                    First:"What your lastname?"
+                }
             },
             Last:{
-                First:"67890",
+                First:"",
                 IFblocks:{
-                    ifConditionParam:{First:"condition"},
-                    Then:{First:"one"},
-                    Else:{First:"two"},
+                    ifConditionParam: {
+                        First:"{position}"
+                    },
+                    Then:{
+                        First:"Are your in {position}?"
+                    },
+                    Else:{
+                        First:"Where are your?"
+                    }
                 },
-                Last:{First:"two"}
-            },
+                Last:{
+                    First:"{company} send to give you manual"
+                }
+            }
         }
     }
 };
