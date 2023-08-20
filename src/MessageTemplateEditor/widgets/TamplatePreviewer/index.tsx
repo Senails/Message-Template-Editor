@@ -4,6 +4,7 @@ import { MyInput } from '../../../shared/components/MyInput';
 import styles from './index.module.scss';
 import { MessageGenerator } from '../../utils/MessageGenerator';
 import { TTamplateStruct } from '../../types';
+import { MyTextArea } from '../../../shared/components/MyTextArea';
 
 type TProps = {
     params : Array<string>;
@@ -29,12 +30,16 @@ export function TamplatePreviewer({params, tamplate, onCloseClick}:TProps){
     
     
     return <div className={styles.TamplatePreviewer}>
+        <div style={{height:"25px"}}></div>
         <h1>Message Preview</h1>
 
         {/* Message Text */}
-        <p className={styles.resultMessage}>
-            {ComposeMessage()}
-        </p>
+        <div className={styles.resultMessage}>
+            <MyTextArea 
+                value={ComposeMessage()}
+                disabled={true}
+            />
+        </div>
 
         {/* Variables: */}
         <div className={styles.variablesConteiner}>
@@ -54,5 +59,6 @@ export function TamplatePreviewer({params, tamplate, onCloseClick}:TProps){
         <div style={{display:"flex", justifyContent:"center"}}>
             <Button name='Close' onClick={onCloseClick}/>
         </div>
+        <div style={{height:"25px"}}></div>
     </div>
 }

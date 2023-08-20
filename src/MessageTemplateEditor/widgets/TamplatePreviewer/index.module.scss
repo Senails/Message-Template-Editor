@@ -9,6 +9,10 @@
 
     >*{
         margin: 25px 0;
+
+        &:nth-child(1),&:nth-last-child(1){
+            margin: 0;
+        }
     }
 }
 
@@ -32,16 +36,6 @@
 }
 
 .resultMessage{
-    box-sizing: border-box;
-
     width: calc(100% - 100px);
     margin: 0 auto;
-
-    padding: 10px;
-    border-radius: 10px;
-    background-color: white;
-    box-shadow: var(--BoxShadow);
-
-    white-space: pre-wrap;
-    word-break: break-all;
 }

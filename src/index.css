@@ -1,4 +1,5 @@
 *{
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 
@@ -6,6 +7,11 @@
 
   --TextShadow: 0px 0px 5px black;
   --BoxShadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+#root{
+  height: 100vh;
+  background-color: #26282a;
 }
 
 .noselect {

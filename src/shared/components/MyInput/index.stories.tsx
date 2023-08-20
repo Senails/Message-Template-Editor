@@ -3,15 +3,21 @@ import { MyInput } from "./index";
 import { useState } from 'react';
 
 
-let Component = ()=>{
-    let [text,setText]=useState("");
+type propsType = {
+    value: string;
+    placeholder: string;
+    charLimit?: number;
+    type?: 'text'|'password';
+    name?: string;
+    onChange?: (value:string) => void;
+    OnChangeCursorPosition?: (cursorPosition : number|null) => void
+}
+
+let Component = (props:propsType)=>{
+    let [text,setText]=useState(props.value);
 
     return <div style={{maxWidth:"200px"}}>
-        <MyInput 
-        value={text} 
-        placeholder='placeholder' 
-        onChange={setText}
-        />
+        <MyInput {...props} value={text} placeholder={props.placeholder} onChange={setText}/>
     </div>
 }
 
@@ -25,4 +31,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
+    args:{
+        value:"123",
+        placeholder:"placeholder",
+        type:"text",
+    }
 };

@@ -40,7 +40,7 @@ export const TamplateBlock = memo((props:TProps)=>{
 
             {/* togle checkbox for new line */}
             <span className={styles.checkBox+" noselect"}>
-                new line {`(${tamplate.First[0]==="\n"?"enabled":"disnabled"})   `}
+                new line {`(${tamplate.First[0]==="\n"?"enabled":"disabled"})   `}
                 <span style={{cursor:"pointer"}} onClick={TogleNewLine}>
                     {`[click]`}
                 </span>

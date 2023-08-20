@@ -3,6 +3,7 @@ import styles from './index.module.scss';
 
 type propsType = {
     value: string,
+    disabled?: boolean,
     placeholder?: string,
     charsLimit?: number,
     onChange?: (value:string) => void,
@@ -10,7 +11,7 @@ type propsType = {
 }
 
 export function MyTextArea(props:propsType){
-    let {value, placeholder, charsLimit, onChange, OnChangeCursorPosition} = props;
+    let {value, placeholder, charsLimit, disabled, onChange, OnChangeCursorPosition} = props;
     let [Height, setHeight] = useState<number|undefined>();
 
     let originElem = useRef<HTMLTextAreaElement>(null);
@@ -42,6 +43,8 @@ export function MyTextArea(props:propsType){
         className={styles.MyTextarea} 
         placeholder={placeholder}
         value={value}
+        disabled={disabled}
+
         onChange={InnerOnChange}
         onClick={CheckCursorPosition}
         onSelect={CheckCursorPosition}

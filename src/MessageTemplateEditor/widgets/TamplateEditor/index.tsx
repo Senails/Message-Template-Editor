@@ -103,7 +103,9 @@ export function TamplateEditor(props:TProps){
 
 
     return <div className = {styles.tamplateEditor}>
+        <div style={{height:"40px"}}></div>
         <h1>Message Template Editor</h1>
+        <div style={{height:"20px"}}></div>
 
         {/* ParamsList */}
         <ParamsList 
@@ -112,7 +114,7 @@ export function TamplateEditor(props:TProps){
         />
 
         {/* + Add If/Then/Else */}
-        <div style={{display:"flex",justifyContent:"center",margin:"40px 0px 10px 0"}}>
+        <div style={{display:"flex",justifyContent:"center",margin:"20px 0px 10px 0"}}>
             <div style={{margin:"5px"}}>
                 <Button name='+ Add If/Then/Else' onClick={AddIfBlock}/>
             </div>
@@ -131,5 +133,6 @@ export function TamplateEditor(props:TProps){
             <div style={{margin:"5px"}}><Button name='Save' onClick={()=>callbackSave?.(tamplateState)}/></div>
             <div style={{margin:"5px"}}><Button name='Close' onClick={onClickClose}/></div>
         </div>
+        <div style={{height:"100px"}}></div>
     </div>
 }
