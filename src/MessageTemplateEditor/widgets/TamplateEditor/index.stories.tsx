@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { TamplateEditor } from "./index";
+import { TTamplateStruct } from '../../types';
 
 const meta = {
     title: 'Tamplate.Editor/TamplateEditor',
@@ -56,7 +57,8 @@ export const Primary: Story = {
                     First:"{company} want to give you manual"
                 }
             }
-        }
+        },
+        callbackSave: async(t:TTamplateStruct)=>{}
     }
 };
 

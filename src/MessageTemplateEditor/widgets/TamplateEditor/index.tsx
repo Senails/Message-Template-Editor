@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button } from '../../../shared/components/Button';
 import { ParamsList } from '../../components/ParamsList';
 import { TamplateBlock } from '../../components/TamplateBlock';
@@ -9,8 +9,8 @@ import { CreateRecursiveCopy} from '../../../shared/utils/CreateRecursiveCopy/Cr
 
 type TProps = {
     params : Array<string>;
-    tamplate? : TTamplateStruct;
-    callbackSave ? : (tamplate: TTamplateStruct)=>Promise<void>
+    tamplate : TTamplateStruct|null;
+    callbackSave  : (tamplate: TTamplateStruct)=>Promise<void>
     onClickPreview? : (tamplate: TTamplateStruct|null)=>void;
     onClickClose? : ()=>void;
 }
@@ -45,7 +45,7 @@ export function TamplateEditor(props:TProps){
             let newLast = {First: text.slice(pos!), IFblocks: elem.IFblocks, Last: elem.Last,}
             elem.First = text.slice(0,pos!);
             elem.Last = newLast;
-            elem.IFblocks = {ifConditionParam:{First:""}, Then:{First:""}, Else:{First:""}} 
+            elem.IFblocks = {ifConditionParam:{First:""}, Then:{First:"\n"}, Else:{First:"\n"}} 
 
             return copy;
         })
@@ -107,6 +107,9 @@ export function TamplateEditor(props:TProps){
         lastInputPath.current = path;
         lastCursorPosition.current = selectionPosition;
     }
+
+
+    useEffect(()=>ChangeCursorPosition(["First"],tamplateState["First"].length),[]);
 
 
     return <div className = {styles.tamplateEditor}>

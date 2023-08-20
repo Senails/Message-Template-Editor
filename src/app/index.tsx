@@ -1,18 +1,19 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { TamplateEditor } from '../MessageTemplateEditor/widgets/TamplateEditor';
 import { TamplatePreviewer } from '../MessageTemplateEditor/widgets/TamplatePreviewer';
 import { Button } from '../shared/components/Button';
 import { TTamplateStruct } from '../MessageTemplateEditor/types';
 
 import styles from './index.module.scss';
+import { Modal } from '../shared/components/Modal/Modat';
 
 export function App(){
     let [editorVisible,setEditorVisible] = useState(false);
     let [previewerVisible,setPreviewerVisible] = useState(false);
     let editorScrolConteiner = useRef<HTMLDivElement>(null)
 
-    let paramsList = useRef<Array<string>>(["firstname", "lastname", "company", "position"]);
-    let templateForPreview = useRef<TTamplateStruct|null>({First:"123"})
+    let paramsList = useRef<string[]>([]);
+    let templateForPreview = useRef<TTamplateStruct|null>(null);
 
 
     function TogleEditorScreen(){
@@ -28,6 +29,18 @@ export function App(){
         templateForPreview.current = tamplate;
         setPreviewerVisible(() => !previewerVisible);
     }
+    async function SaveTamplate(tamplate: TTamplateStruct){
+        localStorage.setItem("template",JSON.stringify(tamplate));
+    }
+
+
+    useEffect(()=>{
+        let json = localStorage.getItem("arrVarNames");
+        paramsList.current = json?JSON.parse(json):["firstname", "lastname", "company", "position"];
+
+        json = localStorage.getItem("template");
+        templateForPreview.current = json?JSON.parse(json):null;
+    },[])
 
 
     return <div className={styles.App}>
@@ -43,11 +56,13 @@ export function App(){
         {/* screen with editor */}
         <div className={styles.Screen} style={{top:!editorVisible?"100%":"0"}}>
             <div ref={editorScrolConteiner} className={styles.CenterOnScreen}>
-                <div style={{maxWidth:"900px",margin:"0 auto"}}>
+                <div style={{maxWidth:"800px",margin:"0 auto"}}>
                     <TamplateEditor
                         params={paramsList.current}
+                        tamplate={templateForPreview.current}
                         onClickClose={TogleEditorScreen}
                         onClickPreview={ToglePreview}
+                        callbackSave={SaveTamplate}
                     />
                 </div>
             </div>
@@ -55,14 +70,14 @@ export function App(){
 
         {/* screen with preview */}
         {previewerVisible?<div className={styles.Screen}>
-            <div className={styles.BackBlur}>
-                <div className={styles.Modal}>
+            <div className={styles.BlackBlur}>
+                <Modal>
                     <TamplatePreviewer 
                         params={paramsList.current}
                         onCloseClick={()=>{ToglePreview(null)}}
                         tamplate={templateForPreview.current!}
                     />
-                </div>
+                </Modal>
             </div>
         </div>:<></>}
     </div>
