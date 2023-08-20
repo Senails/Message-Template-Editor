@@ -15,7 +15,7 @@ type TProps = {
 
 export const TamplateBlock = memo((props:TProps)=>{
     let {tamplate, path} = props;
-    let {ChangeState, OnChangeCursorPosition} = props.functions; 
+    let {ChangeState, ChangeCursorPosition} = props.functions; 
     
     let myPath = [...path, "First"];
 
@@ -35,7 +35,7 @@ export const TamplateBlock = memo((props:TProps)=>{
             <MyTextArea 
                 value={tamplate.First} 
                 onChange={OnChangeTextArea}
-                OnChangeCursorPosition = {(num)=>OnChangeCursorPosition(myPath,num)}
+                OnChangeCursorPosition = {(num)=>ChangeCursorPosition(myPath,num)}
             />
 
             {/* togle checkbox for new line */}

@@ -20,7 +20,7 @@ export const Primary: Story = {
         functions:{
             DeleteIfBlock: ()=>{},
             ChangeState: ()=>{},
-            OnChangeCursorPosition: ()=>{}
+            ChangeCursorPosition: ()=>{}
         }
     }
 };

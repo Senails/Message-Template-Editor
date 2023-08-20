@@ -18,7 +18,7 @@ export const One: Story = {
         functions:{
             DeleteIfBlock: ()=>{},
             ChangeState: ()=>{},
-            OnChangeCursorPosition: ()=>{}
+            ChangeCursorPosition: ()=>{}
         }
     }
 };
@@ -38,7 +38,7 @@ export const Many: Story = {
         functions:{
             DeleteIfBlock: ()=>{},
             ChangeState: ()=>{},
-            OnChangeCursorPosition: ()=>{}
+            ChangeCursorPosition: ()=>{}
         }
     }
 };

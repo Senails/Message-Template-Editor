@@ -12,7 +12,9 @@ type propsType = {
 
 export function MyTextArea(props:propsType){
     let {value, placeholder, charsLimit, disabled, onChange, OnChangeCursorPosition} = props;
+
     let [Height, setHeight] = useState<number|undefined>();
+    let [isFirst,SetIsFirst] = useState<boolean>(true);
 
     let originElem = useRef<HTMLTextAreaElement>(null);
     let checkElem = useRef<HTMLTextAreaElement>(null);
@@ -34,6 +36,9 @@ export function MyTextArea(props:propsType){
             setHeight(checkElem.current!.scrollHeight + 20);
         }
     }
+
+    
+    useEffect(()=>{setTimeout(()=> SetIsFirst(false),100)},[])
     useEffect(Resize,[value])
 
     
@@ -49,7 +54,7 @@ export function MyTextArea(props:propsType){
         onClick={CheckCursorPosition}
         onSelect={CheckCursorPosition}
 
-        style={{height:`${Height}px`}}
+        style={{height:`${Height}px`,transition: isFirst?"none":"0.3s"}}
         ></textarea>
 
         {/* hidden textarea */}

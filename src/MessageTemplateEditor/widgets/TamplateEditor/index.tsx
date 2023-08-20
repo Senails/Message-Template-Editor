@@ -11,14 +11,14 @@ type TProps = {
     params : Array<string>;
     tamplate? : TTamplateStruct;
     callbackSave ? : (tamplate: TTamplateStruct)=>Promise<void>
-    onClickPreview? : (tamplate: TTamplateStruct)=>void;
+    onClickPreview? : (tamplate: TTamplateStruct|null)=>void;
     onClickClose? : ()=>void;
 }
 
 export type ChildrenPropsFunctions = {
     DeleteIfBlock: (path:string[])=>void;
     ChangeState: (path:string[], newValue:string)=>void;
-    OnChangeCursorPosition: (path:string[],selection: number|null)=>void;
+    ChangeCursorPosition: (path:string[],selection: number|null)=>void;
 }
 
 export function TamplateEditor(props:TProps){
@@ -35,6 +35,7 @@ export function TamplateEditor(props:TProps){
         seTamplateState((prev)=>{
             let path = lastInputPath.current;
             let pos = lastCursorPosition.current;
+
             let text = GetValueByPath(path);
 
             let copy = CreateRecursiveCopy(prev!) as TTamplateStruct;
@@ -51,6 +52,7 @@ export function TamplateEditor(props:TProps){
     }
     function ClickParams(param: string){
         let path = lastInputPath.current.length > 0 ? lastInputPath.current : ["First"];
+        
         let oldValue = GetValueByPath(path);
 
         let pos = lastCursorPosition.current === null? oldValue.length : lastCursorPosition.current;
@@ -71,6 +73,11 @@ export function TamplateEditor(props:TProps){
             elem.First += elem.Last!.First;
             elem.Last = elem.Last!.Last
 
+            try{
+                GetValueByPath(lastInputPath.current,copy)
+            }catch{
+                ChangeCursorPosition(["First"],copy["First"].length);
+            }
             return copy;
         });
     }
@@ -86,8 +93,8 @@ export function TamplateEditor(props:TProps){
             return copy;
         });
     }
-    function GetValueByPath(path:string[]):string{
-        let elem:any = tamplateState;
+    function GetValueByPath(path:string[],tamplate: TTamplateStruct = tamplateState):string{
+        let elem:any = tamplate;
         let result:string = "";
 
         path.forEach((str,i)=>{
@@ -96,7 +103,7 @@ export function TamplateEditor(props:TProps){
         })
         return result;
     }
-    function OnChangeCursorPosition(path:string[],selectionPosition: number|null){
+    function ChangeCursorPosition(path:string[],selectionPosition: number|null){
         lastInputPath.current = path;
         lastCursorPosition.current = selectionPosition;
     }
@@ -124,7 +131,7 @@ export function TamplateEditor(props:TProps){
         <TamplateBlock 
             tamplate={tamplateState} 
             path={[]} 
-            functions={{ChangeState,DeleteIfBlock,OnChangeCursorPosition}}
+            functions={{ChangeState,DeleteIfBlock,ChangeCursorPosition}}
         />
 
         {/* Preview/Save/Close */}
