@@ -2,12 +2,12 @@ import { Button } from '../../../shared/components/Button';
 import styles from './index.module.scss';
 
 type TProps = {
-    params : string[];
-    onClick? : (name: string) => void;
+    params: string[];
+    onClick?: (name: string) => void;
 }
 
 export function ParamsList({params, onClick}:TProps){
-    return <div className={styles.ParamsList}>
+    return <div className={styles.Conteiner}>
         <p>Parametrs:</p>
         {params.map((str, i)=><Button 
             name={`{${str}}`}

@@ -16,8 +16,8 @@ export const IfBlock = memo((props:TProps)=>{
     let {ifParams, path} = props;
     let {DeleteIfBlock} = props.functions; 
 
-    const {ifConditionParam, Then, Else} = ifParams;
-    let myPath = [...path, "ifConditionParam"];
+    const {IfConditionParam, Then, Else} = ifParams;
+    let myPath = [...path, "IfConditionParam"];
 
 
     function DeleteClick(){
@@ -25,16 +25,16 @@ export const IfBlock = memo((props:TProps)=>{
     }
 
 
-    return <div className={styles.IfBlock}>
+    return <div className={styles.Conteiner}>
         {/* if */}
         <div>
             <div style={{paddingTop:"7px"}}>
                 <span>If</span>
                 <Button name={"delete"} onClick={DeleteClick}/>
             </div>
-            <div className={styles.TextAreaConteiner}>
+            <div>
                 <TamplateBlock 
-                    tamplate={ifConditionParam} 
+                    tamplate={IfConditionParam} 
                     path={myPath} 
                     functions={props.functions}
                 />
@@ -44,7 +44,7 @@ export const IfBlock = memo((props:TProps)=>{
         {/* Then */}
         <div>
             <div><span>Then</span></div>
-            <div className={styles.TextAreaConteiner}>
+            <div>
                 <TamplateBlock 
                     tamplate={Then} 
                     path={[...path,"Then"]} 
@@ -56,7 +56,7 @@ export const IfBlock = memo((props:TProps)=>{
         {/* Else */}
         <div>
             <div><span>Else</span></div>
-            <div className={styles.TextAreaConteiner}>
+            <div>
                 <TamplateBlock 
                     tamplate={Else} 
                     path={[...path,"Else"]}

@@ -2,17 +2,17 @@ import { useEffect, useRef, useState } from 'react';
 import { Button } from '../../../shared/components/Button';
 import { ParamsList } from '../../components/ParamsList';
 import { TamplateBlock } from '../../components/TamplateBlock';
-import { TTamplateStruct } from '../../types';
+import { TTamplateConfig, TTamplateStruct } from '../../types';
 
 import styles from './index.module.scss';
 import { CreateRecursiveCopy} from '../../../shared/utils/CreateRecursiveCopy/CreateRecursiveCopy';
 
 type TProps = {
-    params : Array<string>;
-    tamplate : TTamplateStruct|null;
-    callbackSave  : (tamplate: TTamplateStruct)=>Promise<void>
-    onClickPreview? : (tamplate: TTamplateStruct|null)=>void;
-    onClickClose? : ()=>void;
+    params: Array<string>;
+    tamplate?: TTamplateConfig;
+    callbackSave: (tamplate: TTamplateConfig)=>Promise<void>
+    onClickPreview?: (tamplate: TTamplateConfig|null)=>void;
+    onClickClose?: ()=>void;
 }
 
 export type ChildrenPropsFunctions = {
@@ -23,7 +23,7 @@ export type ChildrenPropsFunctions = {
 
 export function TamplateEditor(props:TProps){
     let {params, tamplate, callbackSave , onClickPreview, onClickClose} = props;
-    let [tamplateState, seTamplateState] = useState(tamplate||{First:""});
+    let [tamplateState, setTamplateState] = useState<TTamplateStruct>(tamplate?.Tamplate||{First:""});
 
     let lastInputPath = useRef<Array<string>>([]);
     let lastCursorPosition = useRef<number|null>(null);
@@ -32,7 +32,7 @@ export function TamplateEditor(props:TProps){
     function AddIfBlock(){
         if (lastCursorPosition.current === null) return;
         if (lastInputPath.current.length === 0) return;
-        seTamplateState((prev)=>{
+        setTamplateState((prev)=>{
             let path = lastInputPath.current;
             let pos = lastCursorPosition.current;
 
@@ -40,12 +40,12 @@ export function TamplateEditor(props:TProps){
 
             let copy = CreateRecursiveCopy(prev!) as TTamplateStruct;
             let elem:any = copy;
-            path.forEach((str,i)=>{if (i < path.length - 1) elem=elem[str];})
+            path.forEach((str, i) => {if (i < path.length - 1) elem = elem[str];})
 
-            let newLast = {First: text.slice(pos!), IFblocks: elem.IFblocks, Last: elem.Last,}
-            elem.First = text.slice(0,pos!);
+            let newLast = {First: text.slice(pos!), IFBlocks: elem.IFBlocks, Last: elem.Last,}
+            elem.First = text.slice(0, pos!);
             elem.Last = newLast;
-            elem.IFblocks = {ifConditionParam:{First:""}, Then:{First:"\n"}, Else:{First:"\n"}} 
+            elem.IFBlocks = {IfConditionParam: {First: ""}, Then: {First: ""}, Else: {First: ""}} 
 
             return copy;
         })
@@ -55,67 +55,68 @@ export function TamplateEditor(props:TProps){
         
         let oldValue = GetValueByPath(path);
 
-        let pos = lastCursorPosition.current === null? oldValue.length : lastCursorPosition.current;
-        let newValue = oldValue.slice(0,pos)+`{${param}}`+oldValue.slice(pos);
+        let pos = lastCursorPosition.current === null ? oldValue.length : lastCursorPosition.current;
+        let newValue = oldValue.slice(0,pos) + `{${param}}` + oldValue.slice(pos);
 
-        ChangeState(path,newValue);
+        ChangeCursorPosition(lastInputPath.current, lastCursorPosition.current!+(`{${param}}`).length);
+        ChangeState(path, newValue);
     }
 
 
-    function DeleteIfBlock(path:string[]){
-        seTamplateState((prev)=>{
+    function DeleteIfBlock(path: string[]){
+        setTamplateState((prev)=>{
             let copy = CreateRecursiveCopy(prev) as TTamplateStruct;
-            let elem:any = copy;
-            path.forEach((str,i)=>{ if (i !== path.length - 1) elem=elem[str]; })
+            let elem: any = copy;
+            path.forEach((str, i)=>{ if (i !== path.length - 1) elem = elem[str]; })
 
-            delete elem.IFblocks;
-            elem.IFblocks = elem.Last!.IFblocks;
+            delete elem.IFBlocks;
+            elem.IFBlocks = elem.Last!.IFBlocks;
             elem.First += elem.Last!.First;
             elem.Last = elem.Last!.Last
 
             try{
                 GetValueByPath(lastInputPath.current,copy)
             }catch{
-                ChangeCursorPosition(["First"],copy["First"].length);
+                ChangeCursorPosition(["First"], copy["First"].length);
             }
             return copy;
         });
     }
-    function ChangeState(path:string[], newValue:string){
-        seTamplateState((prev)=>{
+    function ChangeState(path: string[], newValue: string){
+        setTamplateState((prev)=>{
             let copy = CreateRecursiveCopy(prev) as TTamplateStruct;
             let elem:any = copy;
             path.forEach((str,i)=>{
-                if (i === path.length - 1) return elem[str]=newValue;
-                elem=elem[str];
+                if (i === path.length - 1) return elem[str] = newValue;
+                elem = elem[str];
             })
 
             return copy;
         });
     }
-    function GetValueByPath(path:string[],tamplate: TTamplateStruct = tamplateState):string{
-        let elem:any = tamplate;
-        let result:string = "";
+    function GetValueByPath(path: string[],tamplate: TTamplateStruct = tamplateState):string{
+        let elem: any = tamplate;
+        let result: string = "";
 
-        path.forEach((str,i)=>{
+        path.forEach((str, i)=>{
             if (i === path.length - 1) return result = elem[str];
-            elem=elem[str];
+            elem = elem[str];
         })
         return result;
     }
-    function ChangeCursorPosition(path:string[],selectionPosition: number|null){
+    function ChangeCursorPosition(path: string[],selectionPosition: number|null){
         lastInputPath.current = path;
         lastCursorPosition.current = selectionPosition;
     }
 
 
-    useEffect(()=>ChangeCursorPosition(["First"],tamplateState["First"].length),[]);
+    useEffect(() => ChangeCursorPosition(["First"], tamplate?.Tamplate["First"].length || 0), [tamplate]);
 
 
     return <div className = {styles.tamplateEditor}>
-        <div style={{height:"40px"}}></div>
+        <div style={{height: "40px"}}></div>
         <h1>Message Template Editor</h1>
-        <div style={{height:"20px"}}></div>
+        <div style={{height: "20px"}}></div>
 
         {/* ParamsList */}
         <ParamsList 
@@ -124,8 +125,8 @@ export function TamplateEditor(props:TProps){
         />
 
         {/* + Add If/Then/Else */}
-        <div style={{display:"flex",justifyContent:"center",margin:"20px 0px 10px 0"}}>
-            <div style={{margin:"5px"}}>
+        <div style={{display: "flex", justifyContent: "center", margin: "20px 0px 10px 0"}}>
+            <div style={{margin: "5px"}}>
                 <Button name='+ Add If/Then/Else' onClick={AddIfBlock}/>
             </div>
         </div>
@@ -138,10 +139,16 @@ export function TamplateEditor(props:TProps){
         />
 
         {/* Preview/Save/Close */}
-        <div style={{display:"flex",justifyContent:"center",margin:"40px 0px"}}>
-            <div style={{margin:"5px"}}><Button name='Preview' onClick={()=>onClickPreview?.(tamplateState)}/></div>
-            <div style={{margin:"5px"}}><Button name='Save' onClick={()=>callbackSave?.(tamplateState)}/></div>
-            <div style={{margin:"5px"}}><Button name='Close' onClick={onClickClose}/></div>
+        <div style={{display: "flex", justifyContent: "center", margin: "40px 0px"}}>
+            <div style={{margin: "5px"}}>
+                <Button name='Preview' onClick={()=>onClickPreview?.({Tamplate: tamplateState, ParamList: params})}/>
+            </div>
+            <div style={{margin: "5px"}}>
+                <Button name='Save' onClick={()=>callbackSave?.({Tamplate: tamplateState, ParamList: params})}/>
+            </div>
+            <div style={{margin:"5px"}}>
+                <Button name='Close' onClick={onClickClose}/>
+            </div>
         </div>
         <div style={{height:"100px"}}></div>
     </div>

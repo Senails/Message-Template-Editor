@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { TamplateEditor } from "./index";
-import { TTamplateStruct } from '../../types';
+import { TTamplateConfig } from '../../types';
 
 const meta = {
     title: 'Tamplate.Editor/TamplateEditor',
@@ -28,37 +28,40 @@ export const Primary: Story = {
             'namefdsfs3',
         ],
         tamplate:{
-            First:"Hello {firstname}!",
-            IFblocks:{
-                ifConditionParam: {
-                    First:"{lastname}"
-                },
-                Then:{
-                    First:"Your lastname is {lastname}"
-                },
-                Else:{
-                    First:"What your lastname?"
-                }
-            },
-            Last:{
-                First:"",
-                IFblocks:{
-                    ifConditionParam: {
-                        First:"{position}"
+            ParamList:[],
+            Tamplate:{
+                First:"Hello {firstname}!",
+                IFBlocks:{
+                    IfConditionParam: {
+                        First:"{lastname}"
                     },
                     Then:{
-                        First:"Are your in {position}?"
+                        First:"Your lastname is {lastname}"
                     },
                     Else:{
-                        First:"Where are your?"
+                        First:"What your lastname?"
                     }
                 },
                 Last:{
-                    First:"{company} want to give you manual"
+                    First:"",
+                    IFBlocks:{
+                        IfConditionParam: {
+                            First:"{position}"
+                        },
+                        Then:{
+                            First:"Are your in {position}?"
+                        },
+                        Else:{
+                            First:"Where are your?"
+                        }
+                    },
+                    Last:{
+                        First:"{company} want to give you manual"
+                    }
                 }
-            }
+            },
         },
-        callbackSave: async(t:TTamplateStruct)=>{}
+        callbackSave: async(t:TTamplateConfig)=>{}
     }
 };
 

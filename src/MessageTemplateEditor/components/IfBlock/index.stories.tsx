@@ -12,7 +12,7 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
     args:{
         ifParams:{
-            ifConditionParam:{First:"condition"},
+            IfConditionParam:{First:"condition"},
             Then:{First:"one"},
             Else:{First:"two"},
         },

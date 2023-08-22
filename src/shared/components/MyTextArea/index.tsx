@@ -42,28 +42,32 @@ export function MyTextArea(props:propsType){
     useEffect(Resize,[value])
 
     
-    return <div className={styles.MyTextareaConteiner}>
-        {/* real textarea */}
+    return <div className={styles.Conteiner}>
+        {/* visible textarea */}
         <textarea ref={originElem}
-        className={styles.MyTextarea} 
-        placeholder={placeholder}
-        value={value}
-        disabled={disabled}
+            className={styles.VisibleTextarea} 
+            placeholder={placeholder}
+            value={value}
+            disabled={disabled}
 
-        onChange={InnerOnChange}
-        onClick={CheckCursorPosition}
-        onSelect={CheckCursorPosition}
+            onChange={InnerOnChange}
+            onClick={CheckCursorPosition}
+            onSelect={CheckCursorPosition}
 
-        style={{height:`${Height}px`,transition: isFirst?"none":"0.3s"}}
+            style={{height:`${Height}px`,transition: isFirst?"none":"0.3s"}}
         ></textarea>
 
         {/* hidden textarea */}
         <div style={{height:"0px",width:"100%",position:"relative",overflow:"hidden"}}>
-            <textarea ref={checkElem} className={styles.textForCheck} value={value} readOnly></textarea>
+            <textarea className={styles.HiddenTextarea} 
+                ref={checkElem} 
+                value={value} 
+                readOnly>
+            </textarea>
         </div>
 
         {/* char score */}
-        {charsLimit && <div className={styles.charsLimitInfo}>
+        {charsLimit && <div className={styles.CharScore}>
             <span>{value.length}/{charsLimit} chars</span>
         </div>}
     </div>

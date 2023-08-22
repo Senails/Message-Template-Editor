@@ -1,16 +1,17 @@
-.IfBlock{
-    // border: 1px solid red;
-
-    >div{
+.Conteiner{
+    > div{
         display: flex;
         margin: 3px 0px;
 
-        >div{
+        > div{
             width: 110px;
-
+            
+            &:nth-child(2){
+                width: calc(100% - 110px);
+            }
             &:nth-child(1){
                 align-items: center;
-                >*{
+                > *{
                     margin: 5px;
                 }
                 span{
@@ -20,11 +21,6 @@
                     color: white;
                     background-color: black;
                 }   
-
-
-            }
-            &:nth-child(2){
-                width: calc(100% - 110px);
             }
         }
     }

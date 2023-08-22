@@ -33,18 +33,18 @@ export function MyInput(props:propsType){
     }
 
     
-   return <div onClick={OnClick} className={styles.MyInput + " " + ((value.length > 0 || isActive) ? styles.active : "")}>
-        {/* placeolder */}
-        <div className={styles.inputFon}></div>
-        <span className={styles.placeholderBlock + " noselect"}>
+   return <div onClick={OnClick} className={styles.Conteiner + " " + ((value.length > 0 || isActive) ? styles.active : "")}>
+        <div className={styles.Background}></div>
+        {/* placeholder */}
+        <span className={styles.PlaceholderBackground + " noselect"}>
             {placeholderText.current}
         </span>
-        <span className={styles.placeholderText + " noselect"}>
+        <span className={styles.PlaceholderText + " noselect"}>
             {placeholderText.current}
         </span>
         
 
-        {/* real input */}
+        {/* input */}
         <input ref={inputElem} type={type || "text"} name={name} 
             onFocus={() => setState(true)} 
             onBlur={() => setState(false)}

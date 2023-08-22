@@ -29,7 +29,8 @@ export const TamplateBlock = memo((props:TProps)=>{
         } else ChangeState(myPath,"\n"+tamplate.First);
     }
 
-    return <div className={styles.TamplateBlock}>
+    
+    return <div>
         {/* First */}
         <div style={{position:"relative"}}>
             <MyTextArea 
@@ -39,7 +40,7 @@ export const TamplateBlock = memo((props:TProps)=>{
             />
 
             {/* togle checkbox for new line */}
-            <span className={styles.checkBox+" noselect"}>
+            <span className={styles.CheckBox+" noselect"}>
                 new line {`(${tamplate.First[0]==="\n"?"enabled":"disabled"})   `}
                 <span style={{cursor:"pointer"}} onClick={TogleNewLine}>
                     {`[click]`}
@@ -48,9 +49,9 @@ export const TamplateBlock = memo((props:TProps)=>{
         </div>
 
         {/* IF */}
-        {tamplate.IFblocks&&<IfBlock 
-            ifParams={tamplate.IFblocks} 
-            path={[...path, "IFblocks"]}
+        {tamplate.IFBlocks&&<IfBlock 
+            ifParams={tamplate.IFBlocks} 
+            path={[...path, "IFBlocks"]}
             functions={props.functions}
         />}
         

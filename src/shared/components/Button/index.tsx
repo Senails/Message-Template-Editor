@@ -7,7 +7,7 @@ type TProps = {
 }
 
 export function Button({name, onClick, textSelectable}:TProps){
-    return <div className={styles.button + (!textSelectable?" noselect":"")} 
+    return <div className={styles.Button + (!textSelectable?" noselect":"")} 
         style={{cursor:`${!textSelectable?"pointer":""}`}}
         onClick={onClick}>
         {name}
