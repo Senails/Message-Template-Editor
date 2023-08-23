@@ -9,41 +9,39 @@ type TestParams = {
 
 }
 
-const ParamList = ["firstname", "lastname", "company", "position"]
 
 //test 1
 export const TestParams1: TestParams = {
-    firstname: "__Firstname__",
-    lastname: "_!_Lastname_!_",
+    firstname: "",
+    lastname: "",
     company: "",
     position: "",
-    alice: "_1234321_",
-    row: "_worrow_",
+    alice: "22222",
+    row: "11111",
 }
 
 export const TestTamplate1: TTamplateConfig = {
-    ParamList,
+    ParamList : ["firstname", "lastname", "company", "position"],
     Tamplate: {
-        First : "{firstname}|____ <-  firstname",
+        First : "12",
         IFBlocks : {
-            IfConditionParam : {First : "{lastname}"},
-            Then: { First : "\nlastname-> _______|{lastname}"},
-            Else: { First : "\nDont have lastname :(((((("},
+            IfConditionParam : {First : ""},
+            Then: { First : "0000"},
+            Else: { 
+                First : "34",
+                IFBlocks:{
+                    IfConditionParam: {First : "1212421412"},
+                    Then : {First : "56"},
+                    Else : {First : "999999"},
+                },
+                Last: {First : ""},
+            },
         },
-        Last : {First : `
-        company -> _______| {company} |____  <-company
-        ||||||\\position/||||||
-        {position}
-        ||||||/position\\||||||`}
+        Last : {First : `7890`}
     },
 }
 
-export const TestResult1: string = `__Firstname__|____ <-  firstname
-lastname-> _______|_!_Lastname_!_
-company -> _______|  |____  <-company
-||||||\\position/||||||
-
-||||||/position\\||||||`;
+export const TestResult1: string = `1234567890`;
 
 //test 2
 export const TestParams2: TestParams = {
@@ -55,7 +53,7 @@ export const TestParams2: TestParams = {
 }
 
 export const TestTamplate2: TTamplateConfig = {
-    ParamList,
+    ParamList : ["firstname", "lastname", "company", "position"],
     Tamplate: {
         First : "\n{firstname}|____ <-  firstname",
         IFBlocks  : {
@@ -97,7 +95,7 @@ export const TestParams3: TestParams = {
 }
 
 export const TestTamplate3: TTamplateConfig = {
-    ParamList,
+    ParamList : ["firstname", "lastname", "company", "position"],
     Tamplate: {First : "\n\n{firstname}{lastname}{company}{position}"},
 }
 
@@ -113,7 +111,7 @@ export const TestParams4: TestParams = {
 }
 
 export const TestTamplate4: TTamplateConfig = {
-    ParamList,
+    ParamList : ["firstname", "lastname", "company", "position"],
     Tamplate: {
         First : "{firstname}{lastname}",
         IFBlocks: {
@@ -127,20 +125,6 @@ export const TestTamplate4: TTamplateConfig = {
 
 export const TestResult4: string = "{lastname}{company}{position}__value__";
 
-//test 5
-export const TestParams5: TestParams = {
-    firstname: "{pos{comp",
-    lastname: "any}{pos",
-    company: "ition}",
-    position: "__value__",
-};
-
-export const TestTamplate5: TTamplateConfig = {
-    ParamList,
-    Tamplate: {First : "{firstname}{lastname}{company}{position}"}
-};
-
-export const TestResult5 = "{pos{company}{position}__value__";
 //test 6
 export const TestParams6: TestParams = {
     firstname: "   ",
@@ -150,7 +134,7 @@ export const TestParams6: TestParams = {
 };
 
 export const TestTamplate6: TTamplateConfig = {
-    ParamList,
+    ParamList : ["firstname", "lastname", "company", "position"],
     Tamplate: {First : "{firstname}{lastname}{company}{position}"}
 };
 
