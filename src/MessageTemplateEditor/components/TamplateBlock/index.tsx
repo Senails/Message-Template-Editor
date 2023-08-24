@@ -44,7 +44,7 @@ export const TamplateBlock = memo((props:TProps)=>{
             <span className={styles.CheckBox+" noselect"}>
                 new line {`(${tamplate.First[0]==="\n"?"enabled":"disabled"})   `}
                 <span style={{cursor:"pointer"}} onClick={TogleNewLine}>
-                    <MouseHoverHint text='Добавить перенос строки'>
+                    <MouseHoverHint text='Добавить перенос строки в начало'>
                         {`[click]`}
                     </MouseHoverHint>
                 </span>
