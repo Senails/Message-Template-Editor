@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { HintManager } from './utils';
+import { HintManager } from './entiti';
 import { CreateTrotling } from '../../utils/CreateTrottling/CreateTrotling';
 
 type TProps = {
