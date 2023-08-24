@@ -1,5 +1,6 @@
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import styles from './index.module.scss';
+import { MouseHoverHint } from '../MouseHoverHint';
 
 type propsType = {
     value: string;
@@ -13,7 +14,9 @@ type propsType = {
 
 export function MyInput(props:propsType){
     let {type="text", placeholder, charLimit, name, value, onChange, OnChangeCursorPosition} = props;
-    let placeholderText = useRef<string>(placeholder.length > 13 ? placeholder.slice(0, 13) + ".." : placeholder);
+    let placeholderText = useMemo(()=>{
+        return placeholder.length > 13 ? placeholder.slice(0, 13) + ".." : placeholder
+    },[placeholder])
     
     let [isActive, setState] = useState<boolean>(false);
     let inputElem = useRef<HTMLInputElement>(null);
@@ -37,10 +40,14 @@ export function MyInput(props:propsType){
         <div className={styles.Background}></div>
         {/* placeholder */}
         <span className={styles.PlaceholderBackground + " noselect"}>
-            {placeholderText.current}
+            {placeholderText}
         </span>
         <span className={styles.PlaceholderText + " noselect"}>
-            {placeholderText.current}
+            {placeholder.length > 13 ? 
+                <MouseHoverHint text={placeholder} display="inline-block">
+                    {placeholderText}
+                </MouseHoverHint>:<>{placeholderText}</>
+            }
         </span>
         
 

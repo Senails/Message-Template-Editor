@@ -5,6 +5,7 @@ import { TamplateBlock } from '../TamplateBlock';
 import styles from './index.module.scss';
 import { ChildrenPropsFunctions } from '../../widgets/TamplateEditor';
 import { RecursiveIsEqual } from '../../../shared/utils/RecursiveIsEqual/RecursiveIsEqual';
+import { MouseHoverHint } from '../../../shared/components/MouseHoverHint';
 
 type TProps = {
     ifParams: IFBlockStruct;
@@ -29,8 +30,14 @@ export const IfBlock = memo((props:TProps)=>{
         {/* if */}
         <div>
             <div style={{paddingTop:"7px"}}>
-                <span>If</span>
-                <Button name={"delete"} onClick={DeleteClick}/>
+                <span>
+                    <MouseHoverHint text='Если поле не пустое то Then иначе Else'>
+                        {"If"}
+                    </MouseHoverHint>
+                </span>
+                <MouseHoverHint text='Удалить условный блок'>
+                    <Button name={"delete"} onClick={DeleteClick}/>
+                </MouseHoverHint>
             </div>
             <div>
                 <TamplateBlock 
@@ -43,7 +50,13 @@ export const IfBlock = memo((props:TProps)=>{
 
         {/* Then */}
         <div>
-            <div><span>Then</span></div>
+            <div>
+                <span>
+                    <MouseHoverHint text='Если поле не пустое то Then иначе Else'>
+                        {"Then"}
+                    </MouseHoverHint>
+                </span>
+            </div>
             <div>
                 <TamplateBlock 
                     tamplate={Then} 
@@ -55,7 +68,13 @@ export const IfBlock = memo((props:TProps)=>{
 
         {/* Else */}
         <div>
-            <div><span>Else</span></div>
+            <div>
+                <span>
+                    <MouseHoverHint text='Если поле не пустое то Then иначе Else'>
+                        {"Else"}
+                    </MouseHoverHint>
+                </span>
+            </div>
             <div>
                 <TamplateBlock 
                     tamplate={Else} 

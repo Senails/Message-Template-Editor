@@ -5,6 +5,7 @@ import styles from './index.module.scss';
 import { MessageGenerator } from '../../utils/MessageGenerator';
 import { TTamplateConfig } from '../../types';
 import { MyTextArea } from '../../../shared/components/MyTextArea';
+import { MouseHoverHint } from '../../../shared/components/MouseHoverHint';
 
 type TProps = {
     params: Array<string>;
@@ -57,7 +58,9 @@ export function TamplatePreviewer({params, tamplate, onCloseClick}:TProps){
 
         {/* close button */}
         <div style={{display: "flex", justifyContent: "center"}}>
-            <Button name='Close' onClick={onCloseClick}/>
+            <MouseHoverHint text='Закрыть превью'>
+                <Button name='Close' onClick={onCloseClick}/>
+            </MouseHoverHint>
         </div>
         <div style={{height: "25px"}}></div>
     </div>

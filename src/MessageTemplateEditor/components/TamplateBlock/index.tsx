@@ -5,6 +5,7 @@ import { IfBlock } from '../IfBlock';
 import styles from './index.module.scss';
 import { ChildrenPropsFunctions } from '../../widgets/TamplateEditor';
 import { RecursiveIsEqual } from '../../../shared/utils/RecursiveIsEqual/RecursiveIsEqual';
+import { MouseHoverHint } from '../../../shared/components/MouseHoverHint';
 
 
 type TProps = {
@@ -43,7 +44,9 @@ export const TamplateBlock = memo((props:TProps)=>{
             <span className={styles.CheckBox+" noselect"}>
                 new line {`(${tamplate.First[0]==="\n"?"enabled":"disabled"})   `}
                 <span style={{cursor:"pointer"}} onClick={TogleNewLine}>
-                    {`[click]`}
+                    <MouseHoverHint text='Добавить перенос строки'>
+                        {`[click]`}
+                    </MouseHoverHint>
                 </span>
             </span>
         </div>

@@ -6,6 +6,7 @@ import { TTamplateConfig, TTamplateStruct } from '../../types';
 
 import styles from './index.module.scss';
 import { CreateRecursiveCopy} from '../../../shared/utils/CreateRecursiveCopy/CreateRecursiveCopy';
+import { MouseHoverHint } from '../../../shared/components/MouseHoverHint';
 
 type TProps = {
     params: Array<string>;
@@ -127,7 +128,9 @@ export function TamplateEditor(props:TProps){
         {/* + Add If/Then/Else */}
         <div style={{display: "flex", justifyContent: "center", margin: "20px 0px 10px 0"}}>
             <div style={{margin: "5px"}}>
-                <Button name='+ Add If/Then/Else' onClick={AddIfBlock}/>
+                <MouseHoverHint text='Разбить последний блок текста на два по положению курсора и вставить условный блок между ними'>
+                    <Button name='+ Add If/Then/Else' onClick={AddIfBlock}/>
+                </MouseHoverHint>
             </div>
         </div>
 
@@ -141,13 +144,19 @@ export function TamplateEditor(props:TProps){
         {/* Preview/Save/Close */}
         <div style={{display: "flex", justifyContent: "center", margin: "40px 0px"}}>
             <div style={{margin: "5px"}}>
-                <Button name='Preview' onClick={()=>onClickPreview?.({Tamplate: tamplateState, ParamList: params})}/>
+                <MouseHoverHint text='Открыть превью этого шаблона'>
+                    <Button name='Preview' onClick={()=>onClickPreview?.({Tamplate: tamplateState, ParamList: params})}/>
+                </MouseHoverHint>
             </div>
             <div style={{margin: "5px"}}>
-                <Button name='Save' onClick={()=>callbackSave?.({Tamplate: tamplateState, ParamList: params})}/>
+                <MouseHoverHint text='Сохранить шаблон'>
+                    <Button name='Save' onClick={()=>callbackSave?.({Tamplate: tamplateState, ParamList: params})}/>
+                </MouseHoverHint>
             </div>
             <div style={{margin:"5px"}}>
-                <Button name='Close' onClick={onClickClose}/>
+                <MouseHoverHint text='Закрыть редактор (без сохранения)'>
+                    <Button name='Close' onClick={onClickClose}/>
+                </MouseHoverHint>
             </div>
         </div>
         <div style={{height:"100px"}}></div>

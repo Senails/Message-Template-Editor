@@ -20,6 +20,7 @@ export function MessageGenerator(params: Params, tamplate: TTamplateConfig):stri
     // replace "{param}" to value
     function Replace(paramsEntries: [string, string][], text: string):string{
         if (text === "") return "";
+        if (paramsEntries.length === 0) return text;
         let arrFragments = text.split(`{${paramsEntries[0][0]}}`);
     
         if (paramsEntries.length > 1) arrFragments = arrFragments.map((substr)=>{

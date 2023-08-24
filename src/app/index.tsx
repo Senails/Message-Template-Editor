@@ -5,6 +5,7 @@ import { Button } from '../shared/components/Button';
 import { TTamplateConfig } from '../MessageTemplateEditor/types';
 
 import styles from './index.module.scss';
+import { MouseHoverHint } from '../shared/components/MouseHoverHint';
 
 export function App(){
     let [editorScreen, seteditorScreen] = useState(false);
@@ -55,7 +56,9 @@ export function App(){
         <div className={styles.Screen} style={{top: editorScreen ? "-100%" : "0"}}>
             <div className={styles.CenterOnScreen}>
                 <div style={{display: "flex", justifyContent: "center"}}>
-                    <Button name={'Message Editor'} onClick={editorVisible ? ()=>{} : TogleEditorScreen}/>
+                    <MouseHoverHint text='Открыть редактор шаблонов'>
+                        <Button name={'Message Editor'} onClick={editorVisible ? ()=>{} : TogleEditorScreen}/>
+                    </MouseHoverHint>
                 </div>
             </div>
         </div>

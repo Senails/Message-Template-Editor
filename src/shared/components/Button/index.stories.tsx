@@ -1,10 +1,24 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from "./index";
+import { MouseHoverHint } from '../MouseHoverHint';
+
+type TProps = {
+    name: string;
+    onClick?: () => void;
+    textSelectable? : boolean;
+}
+
+let Component = (props:TProps)=>{
+    return <MouseHoverHint text='кнопка' display="inline-block">
+        <Button {...props}/>
+    </MouseHoverHint>
+}
+
 
 const meta = {
     title: 'Shared.Components/Button',
-    component: Button
-} satisfies Meta<typeof Button>;
+    component: Component
+} satisfies Meta<typeof Component>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

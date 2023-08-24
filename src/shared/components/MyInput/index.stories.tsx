@@ -14,10 +14,10 @@ type propsType = {
 }
 
 let Component = (props:propsType)=>{
-    let [text,setText]=useState(props.value);
+    let [text, setText] = useState(props.value);
 
     return <div style={{maxWidth:"200px"}}>
-        <MyInput {...props} value={text} placeholder={props.placeholder} onChange={setText}/>
+        <MyInput {...props} value={text} onChange={setText}/>
     </div>
 }
 

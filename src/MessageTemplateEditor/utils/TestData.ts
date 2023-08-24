@@ -95,11 +95,11 @@ export const TestParams3: TestParams = {
 }
 
 export const TestTamplate3: TTamplateConfig = {
-    ParamList : ["firstname", "lastname", "company", "position"],
+    ParamList : [],
     Tamplate: {First : "\n\n{firstname}{lastname}{company}{position}"},
 }
 
-export const TestResult3: string = "\n\n";
+export const TestResult3: string = "\n\n{firstname}{lastname}{company}{position}";
 
 
 //test 4
