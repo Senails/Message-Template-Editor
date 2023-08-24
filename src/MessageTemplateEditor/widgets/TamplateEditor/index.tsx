@@ -126,12 +126,10 @@ export function TamplateEditor(props:TProps){
         />
 
         {/* + Add If/Then/Else */}
-        <div style={{display: "flex", justifyContent: "center", margin: "20px 0px 10px 0"}}>
-            <div style={{margin: "5px"}}>
-                <MouseHoverHint text='Разбить последний блок текста на два по положению курсора и вставить условный блок между ними'>
-                    <Button name='+ Add If/Then/Else' onClick={AddIfBlock}/>
-                </MouseHoverHint>
-            </div>
+        <div style={{display: "flex", justifyContent: "center", margin: "40px 0px 20px 0"}}>
+            <MouseHoverHint text='Разбить последний редактируемый блок текста на два по положению курсора и вставить условный блок между ними'>
+                <Button name='+ Add If/Then/Else' onClick={AddIfBlock}/>
+            </MouseHoverHint>
         </div>
 
         {/* Renderer */}

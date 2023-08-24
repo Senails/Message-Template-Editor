@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Hide, Show } from './utils';
+import { HintManager } from './utils';
 import { CreateTrotling } from '../../utils/CreateTrottling/CreateTrotling';
 
 type TProps = {
@@ -10,24 +10,20 @@ type TProps = {
 
 export function MouseHoverHint({text, display, children}:TProps){
     let Trotling1 = useMemo(()=>CreateTrotling(Math.ceil(1000/60)),[]);
-    let Trotling2 = useMemo(()=>CreateTrotling(Math.ceil(1000/60)),[]);
 
     function ShowHint(event: React.MouseEvent){
-        Show(text, event.clientX, event.clientY);
+        console.log(event);
+        Trotling1(() => HintManager.Show(text, event.clientX, event.clientY));
     }
-    function HideHint(){
-        Hide();
+    function HideHint(event: React.MouseEvent){
+        HintManager.Hide();
     }
+
 
     return <div style={{display: display?display:"inline-block"}}
-        onMouseMove={(event)=>Trotling1(()=>ShowHint(event))}
-        onMouseEnter={(event)=>Trotling1(()=>ShowHint(event))}
-        onMouseOver={(event)=>Trotling1(()=>ShowHint(event))}
-
-        onMouseOut={()=>Trotling2(()=>HideHint())}
-        onMouseLeave={()=>Trotling2(()=>HideHint())}
+        onMouseMove={ShowHint}
+        onMouseLeave={HideHint}
         >
-
         {children?children:<></>}
     </div>
 }

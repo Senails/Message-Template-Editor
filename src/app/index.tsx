@@ -57,6 +57,9 @@ export function App(){
             <div className={styles.CenterOnScreen}>
                 <div style={{display: "flex", justifyContent: "center"}}>
                     <MouseHoverHint text='Открыть редактор шаблонов'>
+                        {/* <div style={{height:"300px",width:"300px", border:"1px solid red"}}>
+                        <Button name={'Message Editor'} onClick={editorVisible ? ()=>{} : TogleEditorScreen}/>
+                        </div> */}
                         <Button name={'Message Editor'} onClick={editorVisible ? ()=>{} : TogleEditorScreen}/>
                     </MouseHoverHint>
                 </div>
