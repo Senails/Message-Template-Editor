@@ -31,7 +31,7 @@ export const IfBlock = memo((props:TProps)=>{
         <div>
             <div style={{paddingTop:"7px"}}>
                 <span>
-                    <MouseHoverHint text='Если поле не пустое то "Then" иначе "Else"'>
+                    <MouseHoverHint text='Если это поле не пустое то текст возмут из "Then" иначе из "Else"'>
                         {"If"}
                     </MouseHoverHint>
                 </span>
@@ -52,7 +52,7 @@ export const IfBlock = memo((props:TProps)=>{
         <div>
             <div>
                 <span>
-                    <MouseHoverHint text='Если поле "If" не пустое то "Then" иначе "Else"'>
+                    <MouseHoverHint text='Если поле "If" не пустое то в сообщение попадет этот блок'>
                         {"Then"}
                     </MouseHoverHint>
                 </span>
@@ -70,7 +70,7 @@ export const IfBlock = memo((props:TProps)=>{
         <div>
             <div>
                 <span>
-                    <MouseHoverHint text='Если поле "If" не пустое то "Then" иначе "Else"'>
+                    <MouseHoverHint text='Если поле "If" пустое то в сообщение попадет этот блок'>
                         {"Else"}
                     </MouseHoverHint>
                 </span>
