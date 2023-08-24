@@ -10,7 +10,6 @@ type TProps = {
 
 export function MouseHoverHint({text, display, children}:TProps){
     let Trotling1 = useMemo(()=>CreateTrotling(Math.ceil(1000/60)),[]);
-    // let Trotling2 = useMemo(()=>CreateTrotling(Math.ceil(1000/60)),[]);
 
     function ShowHint(event: React.MouseEvent){
         if (window.navigator.maxTouchPoints !== 0) return;
