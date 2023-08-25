@@ -18,12 +18,12 @@ export class HintManager{
     private static _posIsTop: boolean = false;
     private static _posIsLeft: boolean = false;
 
-    private static _trotlingShow: Trotling = CreateTrotling(Math.ceil(1000/60));
-    private static _trotlingHide: Trotling = CreateTrotling(Math.ceil(1000/60));
+    private static _trotlingShow: Trotling = CreateTrotling(Math.ceil(1000 / 60));
+    private static _trotlingHide: Trotling = CreateTrotling(Math.ceil(1000 / 60));
 
 
-    public static Show(text:string,x:number,y:number){
-        this._trotlingShow(() => this._Show(text,x,y));
+    public static Show(text: string, x: number, y: number){
+        this._trotlingShow(() => this._Show(text, x, y));
     }
 
     public static Hide(){
@@ -31,7 +31,7 @@ export class HintManager{
     } 
 
 
-    private static _Show(text:string,x:number,y:number){
+    private static _Show(text: string, x: number, y: number){
         let elem = this._GetHintElement();
         if (this._setTimeoutTocken) clearTimeout(this._setTimeoutTocken);
         if (!elem) return;
@@ -40,7 +40,7 @@ export class HintManager{
         elem.style.opacity = "1";
         elem.style.transition = "none";
     
-        let pos = this._CalculateHintPosition(x,y);
+        let pos = this._CalculateHintPosition(x, y);
     
         elem.style.top = pos.top;
         elem.style.bottom = pos.bottom;
@@ -81,7 +81,7 @@ export class HintManager{
 
     private static _GetHintElement():HTMLElement|null{
         if (this._elem) return this._elem;
-        this._elem = document.querySelector("."+this._cssClass);
+        this._elem = document.querySelector("." + this._cssClass);
 
         if (this._elem) return this._elem;
         this._elem = this._CreateHintElement();

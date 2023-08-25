@@ -9,7 +9,7 @@ type TProps = {
 }
 
 let Component = (props:TProps)=>{
-    return <MouseHoverHint text='кнопка' display="inline-block">
+    return <MouseHoverHint text='кнопка'>
         <Button {...props}/>
     </MouseHoverHint>
 }

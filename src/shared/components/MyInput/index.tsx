@@ -44,7 +44,7 @@ export function MyInput(props:propsType){
         </span>
         <span className={styles.PlaceholderText + " noselect"}>
             {placeholder.length > 13 ? 
-                <MouseHoverHint text={placeholder} display="inline-block">
+                <MouseHoverHint text={placeholder}>
                     {placeholderText}
                 </MouseHoverHint>:<>{placeholderText}</>
             }
