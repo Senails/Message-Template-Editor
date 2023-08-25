@@ -1,3 +1,4 @@
+import { CreateTrotling, Trotling } from '../../utils/CreateTrottling/CreateTrotling';
 import styles from './index.module.scss';
 
 type HintPosition = {
@@ -17,9 +18,21 @@ export class HintManager{
     static _posIsTop: boolean = false;
     static _posIsLeft: boolean = false;
 
+    static _trotlingShow: Trotling = CreateTrotling(Math.ceil(1000/60));
+    static _trotlingHide: Trotling = CreateTrotling(Math.ceil(1000/60));
 
-    static Show(text:string,x:number,y:number){
-        let elem = HintManager.GetHintElement();
+
+    public static Show(text:string,x:number,y:number){
+        this._trotlingShow(() => this._Show(text,x,y));
+    }
+
+    public static Hide(){
+        this._trotlingHide(() => this._Hide());
+    } 
+
+
+    private static _Show(text:string,x:number,y:number){
+        let elem = this._GetHintElement();
         if (this._setTimeoutTocken) clearTimeout(this._setTimeoutTocken);
         if (!elem) return;
 
@@ -27,7 +40,7 @@ export class HintManager{
         elem.style.opacity = "1";
         elem.style.transition = "none";
     
-        let pos = this.CalculateHintPosition(x,y);
+        let pos = this._CalculateHintPosition(x,y);
     
         elem.style.top = pos.top;
         elem.style.bottom = pos.bottom;
@@ -35,8 +48,8 @@ export class HintManager{
         elem.style.right = pos.right;
     }
     
-    static Hide(){
-        let elem = this.GetHintElement();
+    private static _Hide(){
+        let elem = this._GetHintElement();
         if (!elem) return;
         elem.style.transition = "opacity 0.5s";
         elem.style.opacity = "0";
@@ -49,7 +62,7 @@ export class HintManager{
         },500);
     }  
 
-    static CalculateHintPosition(x:number,y:number):HintPosition{
+    private static _CalculateHintPosition(x:number,y:number):HintPosition{
         let docW = document.documentElement.clientWidth;
         let docH = document.documentElement.clientHeight;
         let isTop = (y * (this._posIsTop ? 1.2 : 1) > (docH - y) * (this._posIsTop ? 1 : 1.2));
@@ -66,17 +79,17 @@ export class HintManager{
         }
     }
 
-    static GetHintElement():HTMLElement|null{
+    private static _GetHintElement():HTMLElement|null{
         if (this._elem) return this._elem;
         this._elem = document.querySelector("."+this._cssClass);
 
         if (this._elem) return this._elem;
-        this._elem = this.CreateHintElement();
+        this._elem = this._CreateHintElement();
 
         return this._elem;
     }
 
-    static CreateHintElement():HTMLElement|null{
+    private static _CreateHintElement():HTMLElement|null{
         let elem = document.createElement("span");
         elem.classList.add(this._cssClass);
         elem.classList.add("noselect");

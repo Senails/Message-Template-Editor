@@ -1,4 +1,4 @@
-type Trotling = (callback: ()=>void ) => void
+export type Trotling = (callback: ()=>void ) => void
 
 // пропускает слишком частые срабатывания
 export function CreateTrotling(ms: number):Trotling{
