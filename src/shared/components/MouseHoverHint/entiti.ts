@@ -1,3 +1,5 @@
+import styles from './index.module.scss';
+
 type HintPosition = {
     top: string,
     bottom: string,
@@ -6,24 +8,26 @@ type HintPosition = {
 }
 
 export class HintManager{
-    static HintElemID = "hint";
+    static _distanceAboutMouse = 5;
+    static _cssClass = styles.Hint;
 
-    static elem: HTMLElement|null = null;
-    static setTimeoutTocken: NodeJS.Timeout|null = null;
+    static _elem: HTMLElement|null = null;
+    static _setTimeoutTocken: NodeJS.Timeout|null = null;
 
-    static posIsTop: boolean = false;
-    static posIsLeft: boolean = false;
+    static _posIsTop: boolean = false;
+    static _posIsLeft: boolean = false;
 
 
     static Show(text:string,x:number,y:number){
         let elem = HintManager.GetHintElement();
-        if (HintManager.setTimeoutTocken) clearTimeout(HintManager.setTimeoutTocken);
+        if (this._setTimeoutTocken) clearTimeout(this._setTimeoutTocken);
         if (!elem) return;
+
         elem.innerHTML = text;
         elem.style.opacity = "1";
         elem.style.transition = "none";
     
-        let pos = HintManager.CalculateHintPosition(x,y);
+        let pos = this.CalculateHintPosition(x,y);
     
         elem.style.top = pos.top;
         elem.style.bottom = pos.bottom;
@@ -31,16 +35,16 @@ export class HintManager{
         elem.style.right = pos.right;
     }
     static Hide(){
-        let elem = HintManager.GetHintElement();
+        let elem = this.GetHintElement();
         if (!elem) return;
         elem.style.transition = "opacity 0.5s";
         elem.style.opacity = "0";
     
-        HintManager.setTimeoutTocken = setTimeout(()=>{
+        this._setTimeoutTocken = setTimeout(()=>{
             if (!elem) return;
             elem.style.top = `-100%`;
             elem.style.bottom = `auto`;
-            HintManager.setTimeoutTocken = null;
+            this._setTimeoutTocken = null;
         },500);
     }  
 
@@ -48,47 +52,32 @@ export class HintManager{
     static CalculateHintPosition(x:number,y:number):HintPosition{
         let docW = document.documentElement.clientWidth;
         let docH = document.documentElement.clientHeight;
-        let isTop = (y * (HintManager.posIsTop ? 1.2 : 1) > (docH - y) * (HintManager.posIsTop ? 1 : 1.2));
-        let isLeft = (x * (HintManager.posIsLeft ? 1.2 : 1) > (docW - x) * (HintManager.posIsLeft ? 1 : 1.2));
+        let isTop = (y * (this._posIsTop ? 1.2 : 1) > (docH - y) * (this._posIsTop ? 1 : 1.2));
+        let isLeft = (x * (this._posIsLeft ? 1.2 : 1) > (docW - x) * (this._posIsLeft ? 1 : 1.2));
     
-        HintManager.posIsTop = isTop;
-        HintManager.posIsLeft = isLeft;
+        this._posIsTop = isTop;
+        this._posIsLeft = isLeft;
     
         return {
-            top: isTop ? `auto` : `${y + 10}px`,
-            bottom: isTop ? `${docH - y + 5}px` : `auto`,
-            left: isLeft ? `auto` : `${x + 10}px`,
-            right: isLeft ? `${docW - x + 5}px` : `auto`,
+            top: isTop ? `auto` : `${y + 5 + this._distanceAboutMouse}px`,
+            bottom: isTop ? `${docH - y + this._distanceAboutMouse}px` : `auto`,
+            left: isLeft ? `auto` : `${x + 5 + this._distanceAboutMouse}px`,
+            right: isLeft ? `${docW - x + this._distanceAboutMouse}px` : `auto`,
         }
     }
     static GetHintElement():HTMLElement|null{
-        if (HintManager.elem) return HintManager.elem;
-        HintManager.elem = document.getElementById(HintManager.HintElemID);
-        if (HintManager.elem) return HintManager.elem;
-        HintManager.elem = HintManager.CreateHintElement();
-        return HintManager.elem;
+        if (this._elem) return this._elem;
+        this._elem = document.querySelector("."+this._cssClass);
+
+        if (this._elem) return this._elem;
+        this._elem = this.CreateHintElement();
+
+        return this._elem;
     }
     static CreateHintElement():HTMLElement|null{
         let elem = document.createElement("span");
-        elem.setAttribute("id", this.HintElemID);
+        elem.classList.add(this._cssClass);
         elem.classList.add("noselect");
-    
-        elem.style.position = "fixed";
-        elem.style.display = "inline";
-    
-        elem.style.minHeight = "24px";
-        elem.style.maxWidth = "300px";
-    
-        elem.style.padding = "6px";
-        elem.style.borderRadius = "6px";
-    
-        elem.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
-        elem.style.color = "rgba(255, 255, 255, 0.9)";
-    
-        elem.style.fontSize = "14px";
-        elem.style.lineHeight = "14px";
-        elem.style.fontFamily = "Arial, Helvetica, sans-serif";
-        elem.style.whiteSpace = "pre-wrap";
     
         elem.addEventListener("mouseenter",()=>{
             elem.style.top = `-100%`;

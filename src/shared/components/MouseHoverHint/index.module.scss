@@ -1,0 +1,18 @@
+.Hint {
+    position: fixed;
+    display: inline;
+
+    min-height: 24px;
+    max-width: 300px;
+
+    padding: 6px;
+    border-radius: 6px;
+
+    background-color: rgba(0, 0, 0, 0.8);
+    color: rgba(255, 255, 255, 0.9);
+
+    font-size: 14px;
+    line-height: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    white-space: pre-wrap;
+}
