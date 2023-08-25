@@ -9,17 +9,17 @@ type HintPosition = {
 }
 
 export class HintManager{
-    static _distanceAboutMouse: number = 5;
-    static _cssClass: string = styles.Hint;
+    private static _distanceAboutMouse: number = 5;
+    private static _cssClass: string = styles.Hint;
 
-    static _elem: HTMLElement|null = null;
-    static _setTimeoutTocken: NodeJS.Timeout|null = null;
+    private static _elem: HTMLElement|null = null;
+    private static _setTimeoutTocken: NodeJS.Timeout|null = null;
 
-    static _posIsTop: boolean = false;
-    static _posIsLeft: boolean = false;
+    private static _posIsTop: boolean = false;
+    private static _posIsLeft: boolean = false;
 
-    static _trotlingShow: Trotling = CreateTrotling(Math.ceil(1000/60));
-    static _trotlingHide: Trotling = CreateTrotling(Math.ceil(1000/60));
+    private static _trotlingShow: Trotling = CreateTrotling(Math.ceil(1000/60));
+    private static _trotlingHide: Trotling = CreateTrotling(Math.ceil(1000/60));
 
 
     public static Show(text:string,x:number,y:number){
