@@ -8,8 +8,8 @@ type HintPosition = {
 }
 
 export class HintManager{
-    static _distanceAboutMouse = 5;
-    static _cssClass = styles.Hint;
+    static _distanceAboutMouse: number = 5;
+    static _cssClass: string = styles.Hint;
 
     static _elem: HTMLElement|null = null;
     static _setTimeoutTocken: NodeJS.Timeout|null = null;
@@ -34,6 +34,7 @@ export class HintManager{
         elem.style.left = pos.left;
         elem.style.right = pos.right;
     }
+    
     static Hide(){
         let elem = this.GetHintElement();
         if (!elem) return;
@@ -47,7 +48,6 @@ export class HintManager{
             this._setTimeoutTocken = null;
         },500);
     }  
-
 
     static CalculateHintPosition(x:number,y:number):HintPosition{
         let docW = document.documentElement.clientWidth;
@@ -65,6 +65,7 @@ export class HintManager{
             right: isLeft ? `${docW - x + this._distanceAboutMouse}px` : `auto`,
         }
     }
+
     static GetHintElement():HTMLElement|null{
         if (this._elem) return this._elem;
         this._elem = document.querySelector("."+this._cssClass);
@@ -74,6 +75,7 @@ export class HintManager{
 
         return this._elem;
     }
+
     static CreateHintElement():HTMLElement|null{
         let elem = document.createElement("span");
         elem.classList.add(this._cssClass);
