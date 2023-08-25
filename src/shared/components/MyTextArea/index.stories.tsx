@@ -12,7 +12,7 @@ type propsType = {
 }
 
 let Component = (prop:propsType)=>{
-    let [text,setText]=useState(prop.value);
+    let [text, setText] = useState(prop.value);
 
     return <div style={{maxWidth:"500px"}}>
         <MyTextArea  {...prop} value={text} onChange={setText}/>

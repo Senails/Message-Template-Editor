@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './index.module.scss';
+import { ReactNextTick } from '../../utils/ReactNextTick/ReactNextTick';
 
 type propsType = {
     value: string,
@@ -37,8 +38,9 @@ export function MyTextArea(props:propsType){
         }
     }
 
-    
-    useEffect(()=>{setTimeout(()=> SetIsFirst(false),100)},[])
+    useEffect(()=>{
+        ReactNextTick().then(() => SetIsFirst(false))
+    },[])
     useEffect(Resize,[value])
 
     
