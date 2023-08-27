@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { TamplateEditor } from "./index";
-import { TTamplateConfig } from '../../types';
 
 const meta = {
     title: 'Tamplate.Editor/TamplateEditor',
@@ -61,7 +60,9 @@ export const Primary: Story = {
                 }
             },
         },
-        callbackSave: async(t:TTamplateConfig)=>{}
+        async callbackSave(tamplate) {},
+        onClickClose() {},
+        onClickPreview(tamplate) {},
     }
 };
 

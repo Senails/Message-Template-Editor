@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from "./index";
 import { MouseHoverHint } from '../MouseHoverHint';
 
+
+
 type TProps = {
     name: string;
     onClick?: () => void;
@@ -9,9 +11,11 @@ type TProps = {
 }
 
 let Component = (props:TProps)=>{
-    return <MouseHoverHint text='кнопка'>
-        <Button {...props}/>
-    </MouseHoverHint>
+    return <div>
+        <MouseHoverHint text="кнопка">
+            <Button {...props}/>
+        </MouseHoverHint>
+    </div>
 }
 
 
